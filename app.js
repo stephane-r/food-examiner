@@ -6,6 +6,8 @@ const logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const foodImageRecognitionRouter = require('./routes/foodImageRecognition');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 

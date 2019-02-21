@@ -1,20 +1,20 @@
 import React, { Component } from "react";
-import "./App.css";
+import FoodRecognition from "./components/FoodRecognition/index";
+import Navbar from "./components/common/Navbar";
 
 class App extends Component {
   render() {
-    return <div>This is a React App</div>;
+    return (
+      <div className="fluid-container">
+        <Navbar />
+        <div className="container">
+          <FoodRecognition />
+        </div>
+      </div>
+    );
   }
 
-  componentDidMount() {
-    fetch("http://localhost:3001/foodImageRecognition/")
-      .then(response => response.json())
-      .then(json => console.log(json))
-      .catch(error => {
-        alert(error);
-        console.log(error);
-      });
-  }
+  componentDidMount() {}
 }
 
 export default App;
