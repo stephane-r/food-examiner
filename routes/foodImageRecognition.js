@@ -3,7 +3,7 @@ var router = express.Router();
 const Clarifai = require('clarifai');
 
 const app = new Clarifai.App({
- apiKey: '5767a625cf1142ebb07676e4f99074a5'
+ apiKey: 'API_KEY'
 });
 
 router.get('/', function(req, res, next) {
