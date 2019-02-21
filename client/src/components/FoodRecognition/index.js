@@ -4,34 +4,15 @@ export default class FoodRecognition extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      predictions: [
-        {
-          name: "Sauce",
-          value: 0.9
-        },
-        {
-          name: "Pizza",
-          value: 0.85
-        },
-        {
-          name: "Toast",
-          value: 0.7
-        },
-        {
-          name: "Tomato",
-          value: 0.6
-        },
-        {
-          name: "Noodles",
-          value: 0.5
-        }
-      ]
+      imageSrc: "",
+      predictions: null,
+      imageLink: ""
     };
   }
 
   render() {
     return (
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ marginTop: "20px", marginBottom: "20px" }}>
         <form
           className="d-flex justify-content-between"
           onSubmit={this._onFormSubmit}
@@ -39,8 +20,10 @@ export default class FoodRecognition extends Component {
           <input
             type="text"
             style={{ flexBasis: "80%" }}
+            value={this.state.imageLink}
             className="form-control"
             placeholder="Provide a direct link to a file on the web"
+            onChange={this._onImageLinkFieldUpdated}
           />
           <button
             className="btn btn-secondary"
@@ -50,56 +33,87 @@ export default class FoodRecognition extends Component {
             Submit
           </button>
         </form>
-        <div className="d-flex rounded border border-success" style={{ marginTop: "20px" }}>
-          <div className="d-flex justify-content-center bg-success" style={{ minWidth: '60%', alignItems: 'center' }}>
-            <img
-              src="https://images.unsplash.com/photo-1528669826296-dbd6f641707d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80"
-              alt="image-placeholder"
-              style={{ width: '80%', height: '80%' }}
-            />
-          </div>
-          <ul
-            className="list-group list-group-flush"
-            style={{ minWidth: '40%' }}
+        <div
+          className="d-flex rounded border border-success"
+          style={{ marginTop: "20px", height: "600px" }}
+        >
+          <div
+            className="bg-success text-center"
+            style={{ minWidth: "60%", padding: "20px", margin: '0px auto' }}
           >
-            <li className="list-group-item d-flex justify-content-between">
-              <span>Prediction</span>
-              <span>Probability</span>
-            </li>
+            {this._renderImage()}
+          </div>
+          <div
+            style={{ minWidth: "40%", overflow: 'scroll' }}
+          >
+            <div className="d-flex justify-content-between border-bottom" style={{ padding: '0.75rem' }}>
+              <div>Prediction</div>
+              <div>Probability</div>
+            </div>
             {this._renderPredictions()}
-          </ul>
+          </div>
         </div>
       </div>
     );
   }
 
-  _onFormSubmit = async () => {
-    // try {
-    //   const response = await fetch(
-    //     "http://localhost:3001/foodImageRecognition/"
-    //   );
-    //   if (!response) {
-    //     return;
-    //   }
-    //   const data = response.json();
-    // } catch (err) {
-    //   console.log(err);
-    //   alert(err);
-    // }
+  _renderImage = () => {
+    if (this.state.imageSrc) {
+      return (
+        <img
+          style={{ maxHeight: '100%', maxWidth: '100%'}}
+          src={this.state.imageSrc}
+          alt="image-placeholder"
+        />
+      );
+    }
+    return null;
+  };
+
+  _onImageLinkFieldUpdated = e => {
+    this.setState({ imageLink: e.target.value });
+  };
+
+  _onFormSubmit = async e => {
+    e.preventDefault();
+    this.setState({
+      imageSrc: this.state.imageLink
+    });
+
+    const url = "http://localhost:3001/foodImageRecognition/";
+    try {
+      const response = await fetch(url, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ imageLink: this.state.imageLink })
+      })
+      const data = await response.json();
+      const predictions = data.outputs[0].data.concepts;
+      this.setState({ predictions });
+    } catch (err) {
+      console.log(err);
+      alert(err);
+    }
   };
 
   _renderPredictions = () => {
+    if (!this.state.predictions) {
+      return <div />;
+    }
     return this.state.predictions.map((p, i) => {
       return (
-        <li
+        <div
+          style={{ padding: '0.75rem' }}
           key={i}
-          className={`list-group-item d-flex justify-content-between ${this._determineTextColor(
+          className={`d-flex justify-content-between border-bottom ${this._determineTextColor(
             p.value
           )}`}
         >
-          <span>{p.name}</span>
-          <span>{p.value}</span>
-        </li>
+          <div>{p.name}</div>
+          <div>{parseFloat(p.value).toFixed(2)}</div>
+        </div>
       );
     });
   };

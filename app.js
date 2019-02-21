@@ -5,13 +5,14 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser')
-const foodImageRecognitionRouter = require('./routes/foodImageRecognition');
+
 const dotenv = require('dotenv');
 dotenv.config();
+const foodImageRecognitionRouter = require('./routes/foodImageRecognition');
+
 
 const app = express();
 
-// view engine setup
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
