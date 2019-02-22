@@ -37,7 +37,7 @@ function renderItems(predictions, predictionsPending) {
       <div
         style={{ padding: "0.75rem" }}
         key={i}
-        className={`d-flex justify-content-between border-bottom ${determineTextColor(
+        className={`prediction d-flex justify-content-between border-bottom ${determineTextColor(
           p.value
         )}`}
       >
@@ -56,4 +56,15 @@ function determineTextColor(value) {
     return "text-info";
   }
   return "text-warning";
+}
+
+function determineBackgroundColor(value) {
+  return '';
+  if (value > 0.8) {
+    return "bg-success";
+  }
+  if (value > 0.6) {
+    return "bg-info";
+  }
+  return "bg-warning";
 }

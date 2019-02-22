@@ -16,6 +16,11 @@
   overflow: scroll;
 }
 
+.prediction:hover {
+  background: #f4f9f4;
+  transition: all 0.2s;
+}
+
 @media only screen and (max-width: 768px) {
   .food-recognition-content {
     max-height: initial;
