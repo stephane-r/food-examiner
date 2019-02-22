@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FoodRecognitionForm from "./FoodRecognitionForm";
 
 export default class FoodRecognition extends Component {
   constructor(props) {
@@ -13,26 +14,7 @@ export default class FoodRecognition extends Component {
   render() {
     return (
       <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-        <form
-          className="d-flex justify-content-between"
-          onSubmit={this._onFormSubmit}
-        >
-          <input
-            type="text"
-            style={{ flexBasis: "80%" }}
-            value={this.state.imageLink}
-            className="form-control"
-            placeholder="Provide a direct link to a file on the web"
-            onChange={this._onImageLinkFieldUpdated}
-          />
-          <button
-            className="btn btn-secondary"
-            type="submit"
-            style={{ flexBasis: "19%" }}
-          >
-            Submit
-          </button>
-        </form>
+        <FoodRecognitionForm value={this.state.imageLink} onFormSubmit={this._onFormSubmit} onInputFieldUpdated={this._onImageLinkFieldUpdated} />
         <div
           className="d-flex rounded border border-success"
           style={{ marginTop: "20px", height: "600px" }}
@@ -67,7 +49,7 @@ export default class FoodRecognition extends Component {
         />
       );
     }
-    return null;
+    return <div className="bg-primary" style={{ height: '100%', width: '100%' }}></div>;
   };
 
   _onImageLinkFieldUpdated = e => {
