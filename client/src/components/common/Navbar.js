@@ -2,30 +2,25 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand">
-        Food Services
-      </a>
-      <div className="collapse navbar-collapse" id="navbarText">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a className="nav-link">
-              Home <span className="sr-only">(current)</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link">
-              Features
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link">
-              Pricing
-            </a>
-          </li>
-        </ul>
-        <span className="navbar-text">Navbar text with an inline element</span>
-      </div>
+    <nav className="navbar navbar-light bg-light justify-content-between">
+      <a className="navbar-brand">Navbar</a>
+      <ul className="navbar-nav flex-row justify-content-between" style={{ flexBasis: '20%' }}>
+        <li className="nav-item active"  >
+          <a className="nav-link" href="#">
+            Food Recognition <span className="sr-only">(current)</span>
+          </a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">
+            Features
+          </a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">
+            Pricing
+          </a>
+        </li>
+      </ul>
     </nav>
   );
 }
