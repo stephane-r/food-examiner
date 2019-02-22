@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FoodRecognitionForm from "./FoodRecognitionForm";
+import FoodRecognitionContent from "./FoodRecognitionContent";
 
 export default class FoodRecognition extends Component {
   constructor(props) {
@@ -15,42 +16,10 @@ export default class FoodRecognition extends Component {
     return (
       <div style={{ marginTop: "20px", marginBottom: "20px" }}>
         <FoodRecognitionForm value={this.state.imageLink} onFormSubmit={this._onFormSubmit} onInputFieldUpdated={this._onImageLinkFieldUpdated} />
-        <div
-          className="d-flex rounded border border-success"
-          style={{ marginTop: "20px", height: "600px" }}
-        >
-          <div
-            className="bg-success text-center"
-            style={{ minWidth: "60%", padding: "20px", margin: '0px auto' }}
-          >
-            {this._renderImage()}
-          </div>
-          <div
-            style={{ minWidth: "40%", overflow: 'scroll' }}
-          >
-            <div className="d-flex justify-content-between border-bottom" style={{ padding: '0.75rem' }}>
-              <div>Prediction</div>
-              <div>Probability</div>
-            </div>
-            {this._renderPredictions()}
-          </div>
-        </div>
+        <FoodRecognitionContent imageSrc={this.state.imageSrc} predictions={this.state.predictions}  />
       </div>
     );
   }
-
-  _renderImage = () => {
-    if (this.state.imageSrc) {
-      return (
-        <img
-          style={{ maxHeight: '100%', maxWidth: '100%'}}
-          src={this.state.imageSrc}
-          alt="image-placeholder"
-        />
-      );
-    }
-    return <div className="bg-primary" style={{ height: '100%', width: '100%' }}></div>;
-  };
 
   _onImageLinkFieldUpdated = e => {
     this.setState({ imageLink: e.target.value });
@@ -78,35 +47,5 @@ export default class FoodRecognition extends Component {
       console.log(err);
       alert(err);
     }
-  };
-
-  _renderPredictions = () => {
-    if (!this.state.predictions) {
-      return <div />;
-    }
-    return this.state.predictions.map((p, i) => {
-      return (
-        <div
-          style={{ padding: '0.75rem' }}
-          key={i}
-          className={`d-flex justify-content-between border-bottom ${this._determineTextColor(
-            p.value
-          )}`}
-        >
-          <div>{p.name}</div>
-          <div>{parseFloat(p.value).toFixed(2)}</div>
-        </div>
-      );
-    });
-  };
-
-  _determineTextColor = value => {
-    if (value > 0.8) {
-      return "text-success";
-    }
-    if (value > 0.6) {
-      return "text-warning";
-    }
-    return "text-muted";
   };
 }

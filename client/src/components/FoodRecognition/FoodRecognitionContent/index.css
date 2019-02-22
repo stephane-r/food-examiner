@@ -1,0 +1,10 @@
+.food-recognition-content {
+    margin-top: 20px;
+    height: 600px
+}
+
+.food-recognition-content__image-container {
+    min-width: 60%;
+    padding: 20px;
+    margin: 0px auto;
+}
