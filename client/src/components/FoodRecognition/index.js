@@ -11,13 +11,15 @@ export default class FoodRecognition extends Component {
       predictions: null,
       predictionsPending: false,
       imageLink: "",
+      stage: 1,
+      googleRecaptchaValue: null
     };
   }
 
   render() {
     return (
       <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-        <FoodRecognitionForm value={this.state.imageLink} onFormSubmit={this._onFormSubmit} onInputFieldUpdated={this._onImageLinkFieldUpdated} predictionsPending={this.state.predictionsPending} />
+        <FoodRecognitionForm value={this.state.imageLink} onFormSubmit={this._onFormSubmit} onInputFieldUpdated={this._onImageLinkFieldUpdated} predictionsPending={this.state.predictionsPending} stage={this.state.stage} onSupplyNewImageButtonClicked={this._onSupplyNewImageButtonClicked} onReCaptchaCompleted={this._onReCaptchaCompleted} />
         <FoodRecognitionContent imageSrc={this.state.imageSrc} predictions={this.state.predictions} predictionsPending={this.state.predictionsPending}  />
       </div>
     );
@@ -41,7 +43,7 @@ export default class FoodRecognition extends Component {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ imageLink: this.state.imageLink })
+        body: JSON.stringify({ imageLink: this.state.imageLink, googleRecaptchaValue: this.state.googleRecaptchaValue })
       })
       const data = await response.json();
       const predictions = data.outputs[0].data.concepts;
@@ -51,4 +53,18 @@ export default class FoodRecognition extends Component {
       alert(err);
     }
   };
+
+  _onSupplyNewImageButtonClicked = () => {
+    this.setState({
+      stage: 2
+    });
+  }
+
+  _onReCaptchaCompleted = (value) => {
+    console.log(value);
+    this.setState({
+      stage: 3,
+      googleRecaptchaValue: value
+    });
+  }
 }

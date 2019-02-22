@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const checkGoogleRecaptcha = require('../middlewares/checkGoogleRecaptcha');
 const Clarifai = require('clarifai');
 const { sleep } = require('../utils');
 
@@ -9,10 +10,11 @@ const app = new Clarifai.App({
  apiKey: process.env.CLARIFAI_API_KEY || 'CLARIFAI_API_KEY'
 });
 
-router.post('/', async (req, res) => {
+router.post('/', checkGoogleRecaptcha, async (req, res) => {
   
   try {
 
+    // For testing loading indicator
     await sleep(1000);
 
     // To prevent over using api keys
