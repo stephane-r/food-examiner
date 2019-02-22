@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { ToastContainer } from 'react-toastify';
+
 import FoodRecognition from "./components/FoodRecognition/index";
 import Navbar from "./components/common/Navbar";
 
@@ -10,6 +12,7 @@ class App extends Component {
         <div className="container">
           <FoodRecognition />
         </div>
+        <ToastContainer />
       </div>
     );
   }
