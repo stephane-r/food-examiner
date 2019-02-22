@@ -13,8 +13,9 @@ export default class FoodRecognition extends Component {
       predictions: null,
       predictionsPending: false,
       imageLink: "",
-      stage: 1,
-      googleRecaptchaValue: null
+      stage: 3,
+      googleRecaptchaValue: null,
+      imageLinkFieldError: null
     };
   }
 
@@ -29,6 +30,7 @@ export default class FoodRecognition extends Component {
           stage={this.state.stage}
           onSupplyNewImageButtonClicked={this._onSupplyNewImageButtonClicked}
           onReCaptchaCompleted={this._onReCaptchaCompleted}
+          imageLinkFieldError={this.state.imageLinkFieldError}
         />
         <FoodRecognitionContent
           imageSrc={this.state.imageSrc}
@@ -40,18 +42,24 @@ export default class FoodRecognition extends Component {
   }
 
   _onImageLinkFieldUpdated = e => {
-    this.setState({ imageLink: e.target.value });
+    this.setState({ imageLink: e.target.value, imageLinkFieldError: null });
   };
 
   _onFormSubmit = async e => {
     e.preventDefault();
-    this.setState({
-      imageSrc: this.state.imageLink,
-      predictionsPending: true
-    });
 
-    const url = "http://localhost:3001/foodImageRecognition/";
+    if (!this.state.imageLink) {
+      this.setState({ imageLinkFieldError: 'Please provide an image link' })
+      return;
+    }
+
     try {
+      this.setState({
+        imageSrc: this.state.imageLink,
+        predictionsPending: true
+      });
+  
+      const url = "http://localhost:3001/foodImageRecognition/";
       const response = await axios.post(url, {
         imageLink: this.state.imageLink,
         googleRecaptchaValue: this.state.googleRecaptchaValue

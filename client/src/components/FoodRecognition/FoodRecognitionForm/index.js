@@ -20,7 +20,7 @@ export default function FoodRecognitionForm(props) {
           className="d-flex justify-content-between"
           onSubmit={props.onFormSubmit}
         >
-          {renderInputField(props.value, props.onInputFieldUpdated)}
+          {renderInputField(props.value, props.onInputFieldUpdated, props.imageLinkFieldError)}
           {renderButton(props.predictionsPending)}
         </form>
       );
@@ -57,22 +57,32 @@ function renderButton(pending = false) {
       disabled={pending}
       className={buttonClass}
       type="submit"
-      style={{ flexBasis: '19%' }}
+      style={{ flexBasis: "19%" }}
     >
       {buttonContent}
     </button>
   );
 }
 
-function renderInputField(value, onChange) {
+function renderInputField(value, onChange, error = '') {
+
+  const invalidFeedbackStyle = {
+    position: 'absolute',
+    display: error ? 'block' : 'none'
+  };
+  const inputClassName = error ? 'form-control is-invalid' : 'form-control';
+
   return (
-    <input
-      type="text"
-      value={value}
-      className="form-control"
-      style={{ flexBasis: '80%' }}
-      placeholder="Provide a direct link to a file on the web"
-      onChange={onChange}
-    />
+    <div style={{ flexBasis: "80%" }}>
+      <input
+        type="text"
+        value={value}
+        className={inputClassName}
+        style={{ position: 'relative' }}
+        placeholder="Provide a direct link to a file on the web"
+        onChange={onChange}
+      />
+      <div class="invalid-feedback" style={invalidFeedbackStyle}>{error}</div>
+    </div>
   );
 }
