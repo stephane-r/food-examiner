@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import FoodRecognitionForm from "./FoodRecognitionForm";
 import FoodRecognitionContent from "./FoodRecognitionContent";
-
+ 
 export default class FoodRecognition extends Component {
   constructor(props) {
     super(props);
     this.state = {
       imageSrc: "",
       predictions: null,
-      imageLink: ""
+      predictionsPending: false,
+      imageLink: "",
     };
   }
 
   render() {
     return (
       <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-        <FoodRecognitionForm value={this.state.imageLink} onFormSubmit={this._onFormSubmit} onInputFieldUpdated={this._onImageLinkFieldUpdated} />
-        <FoodRecognitionContent imageSrc={this.state.imageSrc} predictions={this.state.predictions}  />
+        <FoodRecognitionForm value={this.state.imageLink} onFormSubmit={this._onFormSubmit} onInputFieldUpdated={this._onImageLinkFieldUpdated} predictionsPending={this.state.predictionsPending} />
+        <FoodRecognitionContent imageSrc={this.state.imageSrc} predictions={this.state.predictions} predictionsPending={this.state.predictionsPending}  />
       </div>
     );
   }
@@ -28,7 +29,8 @@ export default class FoodRecognition extends Component {
   _onFormSubmit = async e => {
     e.preventDefault();
     this.setState({
-      imageSrc: this.state.imageLink
+      imageSrc: this.state.imageLink,
+      predictionsPending: true
     });
 
     const url = "http://localhost:3001/foodImageRecognition/";
@@ -42,7 +44,7 @@ export default class FoodRecognition extends Component {
       })
       const data = await response.json();
       const predictions = data.outputs[0].data.concepts;
-      this.setState({ predictions });
+      this.setState({ predictions, predictionsPending: false });
     } catch (err) {
       console.log(err);
       alert(err);

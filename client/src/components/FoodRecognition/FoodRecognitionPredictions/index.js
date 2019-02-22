@@ -1,7 +1,11 @@
 import React from "react";
-import './index.css';
+import "./index.css";
+import Spinner from "react-spinkit";
 
-export default function FoodRecognitionPredictions({ predictions }) {
+export default function FoodRecognitionPredictions({
+  predictions,
+  predictionsPending = false
+}) {
   return (
     <div className="food-recognition-content__predictions">
       <div
@@ -11,12 +15,21 @@ export default function FoodRecognitionPredictions({ predictions }) {
         <div>Prediction</div>
         <div>Probability</div>
       </div>
-      {renderItems(predictions)}
+      {renderItems(predictions, predictionsPending)}
     </div>
   );
 }
 
-function renderItems(predictions) {
+function renderItems(predictions, predictionsPending) {
+  
+  if (predictionsPending) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '400px' }}>
+        <Spinner name="ball-scale-multiple" fadeIn={'none'} />
+      </div>
+    );
+  }
+
   if (!predictions) {
     return <div />;
   }
@@ -41,7 +54,7 @@ function determineTextColor(value) {
     return "text-success";
   }
   if (value > 0.6) {
-    return "text-warning";
+    return "text-info";
   }
-  return "text-muted";
+  return "text-warning";
 }

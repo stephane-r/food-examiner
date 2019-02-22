@@ -7,7 +7,7 @@ export default function FoodRecognitionContent(props) {
   return (
     <div className="d-flex rounded border border-success food-recognition-content">
       {renderImageContainer(props.imageSrc)}
-      <FoodRecognitionPredictions predictions={props.predictions} />
+      <FoodRecognitionPredictions predictions={props.predictions} predictionsPending={props.predictionsPending} />
     </div>
   );
 }

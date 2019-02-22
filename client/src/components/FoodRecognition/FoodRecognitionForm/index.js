@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from 'react-spinkit';
 
 export default function FoodRecognitionForm(props) {
   return (
@@ -7,19 +8,27 @@ export default function FoodRecognitionForm(props) {
       onSubmit={props.onFormSubmit}
     >
       {renderInputField(props.value, props.onInputFieldUpdated)}
-      {renderButton()}
+      {renderButton(props.predictionsPending)}
     </form>
   );
 }
 
-function renderButton() {
+function renderButton(pending = false) {
+
+  const buttonContent = pending ? <Spinner name="three-bounce" color='white' className='spinner-small' fadeIn='none' /> : 'Submit';
+  let buttonClass = 'btn btn-primary d-flex justify-content-center';
+  if (pending) {
+    buttonClass += ' disabled';
+  }
+
   return (
     <button
-      className="btn btn-primary"
+      disabled={pending}
+      className={buttonClass}
       type="submit"
       style={{ flexBasis: "19%" }}
     >
-      Submit
+      {buttonContent}
     </button>
   );
 }
