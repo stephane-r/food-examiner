@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.css";
 import Spinner from "react-spinkit";
 
 export default function FoodRecognitionPredictions({

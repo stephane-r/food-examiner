@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   
   try {
 
-    await sleep(2000);
+    await sleep(1000);
 
     // To prevent over using api keys
     res.send(fakeRes);

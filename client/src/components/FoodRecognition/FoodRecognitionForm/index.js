@@ -15,7 +15,7 @@ export default function FoodRecognitionForm(props) {
 
 function renderButton(pending = false) {
 
-  const buttonContent = pending ? <Spinner name="three-bounce" color='white' className='spinner-small' fadeIn='none' /> : 'Submit';
+  const buttonContent = pending ? <Spinner name="three-bounce" className="spinner-small" color='white'  fadeIn='none' /> : 'Submit';
   let buttonClass = 'btn btn-primary d-flex justify-content-center';
   if (pending) {
     buttonClass += ' disabled';
