@@ -15,7 +15,7 @@ export default function FoodRecognitionForm(props) {
 function renderButton() {
   return (
     <button
-      className="btn btn-secondary"
+      className="btn btn-primary"
       type="submit"
       style={{ flexBasis: "19%" }}
     >

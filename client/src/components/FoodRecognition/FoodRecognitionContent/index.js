@@ -25,6 +25,7 @@ function renderImage(imageSrc) {
     return (
       <img
         className="img-fluid"
+        style={{ maxHeight: '100%', width: 'auto' }}
         src={imageSrc}
         alt="image-placeholder"
       />
