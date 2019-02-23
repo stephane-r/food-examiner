@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Spinner from "react-spinkit";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import { updateImageLinkInput, submitFoodRecognitionForm } from '../../../actions';
+import {
+  updateImageLinkInput,
+  submitFoodRecognitionForm
+} from "../../../actions";
 
 class SubmissionForm extends Component {
-
   constructor(props) {
     super(props);
   }
@@ -13,21 +15,19 @@ class SubmissionForm extends Component {
   render() {
     return (
       <form
-      className="d-flex justify-content-between"
-      onSubmit={this._submitForm}
-    >
-      {this._renderImageLinkInputField(
-        this.props.imageLinkFieldError
-      )}
-      {this._renderButton(this.props.predictionsPending)}
-    </form>
+        className="d-flex justify-content-between"
+        onSubmit={this._submitForm}
+      >
+        {this._renderImageLinkInputField()}
+        {this._renderButton(this.props.predictionsPending)}
+      </form>
     );
   }
 
-  _submitForm = (e) => {
+  _submitForm = e => {
     e.preventDefault();
-    this.props.submitFoodRecognitionForm(this.props.imageLinkInputValue)
-  }
+    this.props.submitFoodRecognitionForm(this.props.imageLinkInputValue);
+  };
 
   _renderButton = () => {
     const pending = this.props.predictionsPending;
@@ -45,7 +45,7 @@ class SubmissionForm extends Component {
     if (pending) {
       buttonClass += " disabled";
     }
-  
+
     return (
       <button
         disabled={pending}
@@ -56,14 +56,14 @@ class SubmissionForm extends Component {
         {buttonContent}
       </button>
     );
-  }
+  };
 
-  _renderImageLinkInputField = (error) => {
+  _renderImageLinkInputField = () => {
     const invalidFeedbackStyle = {
       position: "absolute",
-      display: error ? "block" : "none"
+      display: this.props.imageLinkFieldError ? "block" : "none"
     };
-    const inputClassName = error ? "form-control is-invalid" : "form-control";
+    const inputClassName = this.props.imageLinkFieldError ? "form-control is-invalid" : "form-control";
     return (
       <div style={{ flexBasis: "80%" }}>
         <input
@@ -72,21 +72,22 @@ class SubmissionForm extends Component {
           className={inputClassName}
           style={{ position: "relative" }}
           placeholder="Provide a direct link to a file on the web"
-          onChange={(e) => this.props.updateImageLinkInput(e.target.value)}
+          onChange={e => this.props.updateImageLinkInput(e.target.value)}
         />
         <div className="invalid-feedback" style={invalidFeedbackStyle}>
-          {error}
+          {this.props.imageLinkFieldError}
         </div>
       </div>
     );
-  }
+  };
 }
 
 const mapStateToProps = state => ({
-  ...state.foodRecognition
-})
+  ...state.foodRecognition,
+  ...state.imageLinkFieldError
+});
 
 export default connect(
   mapStateToProps,
   { updateImageLinkInput, submitFoodRecognitionForm }
-)(SubmissionForm)
+)(SubmissionForm);
