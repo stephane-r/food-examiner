@@ -1,7 +1,7 @@
 import React from "react";
 import Spinner from "react-spinkit";
 
-export default function FoodRecognitionPredictions({
+export default function PredictionsList({
   predictions,
   predictionsPending = false
 }) {
@@ -56,15 +56,4 @@ function determineTextColor(value) {
     return "text-info";
   }
   return "text-warning";
-}
-
-function determineBackgroundColor(value) {
-  return '';
-  if (value > 0.8) {
-    return "bg-success";
-  }
-  if (value > 0.6) {
-    return "bg-info";
-  }
-  return "bg-warning";
 }

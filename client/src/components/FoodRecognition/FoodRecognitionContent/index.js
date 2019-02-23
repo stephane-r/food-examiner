@@ -1,34 +1,17 @@
 import React from "react";
 
-import FoodRecognitionPredictions from "../FoodRecognitionPredictions";
+import "./index.css";
+import ImageContainer from './ImageContainer';
+import PredictionsList from "./PredictionsList";
+
 
 export default function FoodRecognitionContent(props) {
   return (
     <div className="d-flex rounded border border-success food-recognition-content">
-      {renderImageContainer(props.imageSrc)}
-      <FoodRecognitionPredictions predictions={props.predictions} predictionsPending={props.predictionsPending} />
+      <ImageContainer imageSrc={props.imageSrc} />
+      <PredictionsList predictions={props.predictions} predictionsPending={props.predictionsPending} />
     </div>
   );
 }
 
-function renderImageContainer(imageSrc) {
-  return (
-    <div className="bg-success text-center food-recognition-content__image-container">
-      {renderImage(imageSrc)}
-    </div>
-  );
-}
 
-function renderImage(imageSrc) {
-  if (imageSrc) {
-    return (
-      <img
-        className="img-fluid"
-        style={{ maxHeight: '100%', width: 'auto' }}
-        src={imageSrc}
-        alt="image-placeholder"
-      />
-    );
-  }
-  return <div className="bg-primary food-recognition-content__image" />;
-}

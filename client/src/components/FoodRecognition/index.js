@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import FoodRecognitionForm from "./FoodRecognitionForm";
 import FoodRecognitionContent from "./FoodRecognitionContent";
 import { toast } from "react-toastify";
-import "./index.css";
 import axios from "axios";
 
 export default class FoodRecognition extends Component {
@@ -50,7 +49,7 @@ export default class FoodRecognition extends Component {
           onInputFieldUpdated={this._onImageLinkFieldUpdated}
           predictionsPending={this.state.predictionsPending}
           stage={this.state.stage}
-          onSupplyNewImageButtonClicked={this._onSupplyNewImageButtonClicked}
+          onProvideNewImageButtonClicked={this._onProvideNewImageButtonClicked}
           onReCaptchaCompleted={this._onReCaptchaCompleted}
           imageLinkFieldError={this.state.imageLinkFieldError}
         />
@@ -87,7 +86,6 @@ export default class FoodRecognition extends Component {
         googleRecaptchaValue: this.state.googleRecaptchaValue
       });
 
-      console.log(response);
       const predictions = response.data.outputs[0].data.concepts;
       this.setState({ predictions, predictionsPending: false, stage: 1 });
     } catch (err) {
@@ -96,7 +94,7 @@ export default class FoodRecognition extends Component {
     }
   };
 
-  _onSupplyNewImageButtonClicked = () => {
+  _onProvideNewImageButtonClicked = () => {
     this.setState({
       stage: 2
     });

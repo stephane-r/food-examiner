@@ -25,6 +25,7 @@
   .food-recognition-content {
     max-height: initial;
     flex-wrap: wrap;
+    height: auto;
   }
 
   .food-recognition-content__image-container {

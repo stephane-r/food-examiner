@@ -1,6 +1,8 @@
 import React from "react";
-import Spinner from "react-spinkit";
 import ReCAPTCHA from "react-google-recaptcha";
+
+import ProvideNewImageButton from './ProvideNewImageButton';
+import SubmissionForm from './SubmissionForm';
 
 export default function FoodRecognitionForm(props) {
   const { stage = 1 } = props;
@@ -16,73 +18,10 @@ export default function FoodRecognitionForm(props) {
       );
     case 3:
       return (
-        <form
-          className="d-flex justify-content-between"
-          onSubmit={props.onFormSubmit}
-        >
-          {renderInputField(props.value, props.onInputFieldUpdated, props.imageLinkFieldError)}
-          {renderButton(props.predictionsPending)}
-        </form>
+        <SubmissionForm onFormSubmit={props.onFormSubmit} value={props.value} onInputFieldUpdated={props.onInputFieldUpdated} imageLinkFieldError={props.imageLinkFieldError} />
       );
     default:
-      return (
-        <button
-          className="btn btn-primary btn-block"
-          onClick={props.onSupplyNewImageButtonClicked}
-        >
-          Supply new image
-        </button>
-      );
+      return <ProvideNewImageButton onClick={props.onProvideNewImageButtonClicked} />;
   }
 }
 
-function renderButton(pending = false) {
-  const buttonContent = pending ? (
-    <Spinner
-      name="three-bounce"
-      className="spinner-small"
-      color="white"
-      fadeIn="none"
-    />
-  ) : (
-    "Submit"
-  );
-  let buttonClass = "btn btn-primary d-flex justify-content-center";
-  if (pending) {
-    buttonClass += " disabled";
-  }
-
-  return (
-    <button
-      disabled={pending}
-      className={buttonClass}
-      type="submit"
-      style={{ flexBasis: "19%" }}
-    >
-      {buttonContent}
-    </button>
-  );
-}
-
-function renderInputField(value, onChange, error = '') {
-
-  const invalidFeedbackStyle = {
-    position: 'absolute',
-    display: error ? 'block' : 'none'
-  };
-  const inputClassName = error ? 'form-control is-invalid' : 'form-control';
-
-  return (
-    <div style={{ flexBasis: "80%" }}>
-      <input
-        type="text"
-        value={value}
-        className={inputClassName}
-        style={{ position: 'relative' }}
-        placeholder="Provide a direct link to a file on the web"
-        onChange={onChange}
-      />
-      <div class="invalid-feedback" style={invalidFeedbackStyle}>{error}</div>
-    </div>
-  );
-}
