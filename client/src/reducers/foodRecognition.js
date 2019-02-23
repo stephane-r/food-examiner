@@ -9,7 +9,8 @@ import {
 } from "../actions/types";
 
 const defaultState = {
-  imageLinkInputValue: 'https://images.unsplash.com/photo-1532980400857-e8d9d275d858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80',
+  imageLinkInputValue:
+    "https://images.unsplash.com/photo-1532980400857-e8d9d275d858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
   imageSrc:
     "https://images.unsplash.com/photo-1532980400857-e8d9d275d858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
   imageLinkFieldError: null,
@@ -36,7 +37,7 @@ const defaultState = {
     }
   ],
   predictionsPending: false,
-  stage: 3,
+  stage: 1,
   googleRecaptchaValue: null
 };
 
@@ -49,7 +50,7 @@ const foodRecognition = (state = defaultState, action) => {
       return {
         ...state,
         imageSrc: action.payload
-      }
+      };
 
     case FOOD_RECOGNITION_FETCH_PREDICTIONS_PENDING:
       return {
@@ -61,8 +62,27 @@ const foodRecognition = (state = defaultState, action) => {
       return {
         ...state,
         predictionsPending: false,
-        predictions: action.payload
-      }
+        predictions: action.payload,
+        stage: 1
+      };
+
+    case FOOD_RECOGNITION_GO_TO_STAGE_1:
+      return {
+        ...state,
+        stage: 1
+      };
+
+    case FOOD_RECOGNITION_GO_TO_STAGE_2:
+      return {
+        ...state,
+        stage: 2
+      };
+
+    case FOOD_RECOGNITION_GO_TO_STAGE_3:
+      return {
+        ...state,
+        stage: 3
+      };
 
     default:
       return state;

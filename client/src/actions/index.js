@@ -35,6 +35,19 @@ export const submitFoodRecognitionForm = (imageLink = '') => {
       
     } catch (err) {
       toast.error(err.response.data.err);
+      dispatch({ type: FOOD_RECOGNITION_GO_TO_STAGE_1 });
     }
   };
 };
+
+export const foodRecognitionGoToStage1 = () => {
+  return ({ type: FOOD_RECOGNITION_GO_TO_STAGE_1 });
+}
+
+export const foodRecognitionGoToStage2 = () => {
+  return ({ type: FOOD_RECOGNITION_GO_TO_STAGE_2 });
+}
+
+export const foodRecognitionGoToStage3 = () => {
+  return ({ type: FOOD_RECOGNITION_GO_TO_STAGE_3 });
+}
