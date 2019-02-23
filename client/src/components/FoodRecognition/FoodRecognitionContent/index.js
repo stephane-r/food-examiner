@@ -1,17 +1,30 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 import "./index.css";
 import ImageContainer from './ImageContainer';
 import PredictionsList from "./PredictionsList";
 
+class FoodRecognitionContent extends Component {
 
-export default function FoodRecognitionContent(props) {
-  return (
-    <div className="d-flex rounded border border-success food-recognition-content">
-      <ImageContainer imageSrc={props.imageSrc} />
-      <PredictionsList predictions={props.predictions} predictionsPending={props.predictionsPending} />
-    </div>
-  );
+  render() {
+    return (
+      <div className="d-flex rounded border border-success food-recognition-content">
+        <ImageContainer imageSrc={this.props.imageSrc} />
+        <PredictionsList predictions={this.props.predictions} predictionsPending={this.props.predictionsPending} />
+      </div>
+    );
+  }
+
 }
 
+const mapStateToProps = state => {
+  const { imageSrc, predictions, predictionsPending } = state.foodRecognition;
+  return {
+    imageSrc, predictions, predictionsPending
+  };
+}
 
+export default connect(
+  mapStateToProps
+)(FoodRecognitionContent)

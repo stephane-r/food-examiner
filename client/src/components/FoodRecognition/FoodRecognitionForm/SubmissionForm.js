@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Spinner from "react-spinkit";
 import { connect } from 'react-redux';
 
-import { updateImageLinkInput } from '../../../actions';
+import { updateImageLinkInput, submitFoodRecognitionForm } from '../../../actions';
 
 class SubmissionForm extends Component {
 
@@ -14,11 +14,9 @@ class SubmissionForm extends Component {
     return (
       <form
       className="d-flex justify-content-between"
-      onSubmit={this.props.onFormSubmit}
+      onSubmit={this._submitForm}
     >
       {this._renderImageLinkInputField(
-        this.props.value,
-        this.props.onInputFieldUpdated,
         this.props.imageLinkFieldError
       )}
       {this._renderButton(this.props.predictionsPending)}
@@ -26,7 +24,13 @@ class SubmissionForm extends Component {
     );
   }
 
-  _renderButton = (pending) => {
+  _submitForm = (e) => {
+    e.preventDefault();
+    this.props.submitFoodRecognitionForm(this.props.imageLinkInputValue)
+  }
+
+  _renderButton = () => {
+    const pending = this.props.predictionsPending;
     const buttonContent = pending ? (
       <Spinner
         name="three-bounce"
@@ -54,7 +58,7 @@ class SubmissionForm extends Component {
     );
   }
 
-  _renderImageLinkInputField = (value, f = '', error) => {
+  _renderImageLinkInputField = (error) => {
     const invalidFeedbackStyle = {
       position: "absolute",
       display: error ? "block" : "none"
@@ -79,10 +83,10 @@ class SubmissionForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  imageLinkInputValue: state.foodRecognition.imageLinkInputValue
+  ...state.foodRecognition
 })
 
 export default connect(
   mapStateToProps,
-  { updateImageLinkInput }
+  { updateImageLinkInput, submitFoodRecognitionForm }
 )(SubmissionForm)

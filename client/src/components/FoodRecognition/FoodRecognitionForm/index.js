@@ -18,7 +18,7 @@ export default function FoodRecognitionForm(props) {
       );
     case 3:
       return (
-        <SubmissionForm onFormSubmit={props.onFormSubmit} value={props.value} onInputFieldUpdated={props.onInputFieldUpdated} imageLinkFieldError={props.imageLinkFieldError} />
+        <SubmissionForm onFormSubmit={props.onFormSubmit} imageLinkFieldError={props.imageLinkFieldError} />
       );
     default:
       return <ProvideNewImageButton onClick={props.onProvideNewImageButtonClicked} />;
