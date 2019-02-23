@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import FoodRecognitionForm from "./FoodRecognitionForm";
-import FoodRecognitionContent from "./FoodRecognitionContent";
+
+import "./index.css";
+import FoodRecognitionForm from "./FoodRecognitionForm/FoodRecognitionForm";
+import FoodRecognitionContent from "./FoodRecognitionContent/FoodRecognitionContent";
+
 
 export default class FoodRecognition extends Component {
   render() {

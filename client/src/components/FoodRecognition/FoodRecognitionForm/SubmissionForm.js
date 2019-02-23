@@ -8,9 +8,6 @@ import {
 } from "../../../actions";
 
 class SubmissionForm extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
