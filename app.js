@@ -1,14 +1,19 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser')
 
 const dotenv = require('dotenv');
 dotenv.config();
+
+/* Needed for unsplash api */
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
+
 const foodImageRecognitionRouter = require('./routes/foodImageRecognition');
+const imagesRouter = require('./routes/images');
 
 
 const app = express();
@@ -32,6 +37,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/foodImageRecognition', foodImageRecognitionRouter);
+app.use('/images', imagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
