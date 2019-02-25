@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Spinner from "react-spinkit";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
+
+import FoodImageGallery from './FoodImageGallery';
 
 import {
   updateImageLinkInput,
@@ -9,6 +12,13 @@ import {
 } from "../../../actions";
 
 class SubmissionForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false
+    };
+
+  }
 
   render() {
     return (
@@ -18,7 +28,9 @@ class SubmissionForm extends Component {
       >
         {this._renderImageLinkInputField()}
         {this._renderSetRandomImageButton()}
+        {this._renderSelectFromGalleryButton()}
         {this._renderSubmitButton()}
+        {this._renderModal()}
       </form>
     );
   }
@@ -28,14 +40,37 @@ class SubmissionForm extends Component {
     this.props.submitFoodRecognitionForm(this.props.imageLinkInputValue);
   };
 
+  _renderModal = () => {
+    return (
+      <Modal
+        size={'lg'}
+        isOpen={this.state.modal}
+        toggle={this.toggleModal}
+        className={this.props.className}
+        backdrop
+      >
+        <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
+        <FoodImageGallery />
+      </Modal>
+    );
+  };
+
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  }
+
   _renderImageLinkInputField = () => {
     const invalidFeedbackStyle = {
       position: "absolute",
       display: this.props.imageLinkFieldError ? "block" : "none"
     };
-    const inputClassName = this.props.imageLinkFieldError ? "form-control is-invalid" : "form-control";
+    const inputClassName = this.props.imageLinkFieldError
+      ? "form-control is-invalid"
+      : "form-control";
     return (
-      <div style={{ flexBasis: "100%", marginBottom: '10px' }}>
+      <div style={{ flexBasis: "100%", marginBottom: "10px" }}>
         <input
           type="text"
           value={this.props.imageLinkInputValue}
@@ -51,6 +86,20 @@ class SubmissionForm extends Component {
     );
   };
 
+  _renderSelectFromGalleryButton = () => {
+    let buttonClass = "btn btn-primary d-flex justify-content-center";
+    return (
+      <button
+        className={buttonClass}
+        type="button"
+        onClick={this.toggleModal}
+        style={{ flexBasis: "33%" }}
+      >
+        {"Select from gallery"}
+      </button>
+    );
+  };
+
   _renderSetRandomImageButton = () => {
     let buttonClass = "btn btn-primary d-flex justify-content-center";
     return (
@@ -58,7 +107,7 @@ class SubmissionForm extends Component {
         className={buttonClass}
         type="button"
         onClick={this.props.getRandomImage}
-        style={{ flexBasis: '49%' }}
+        style={{ flexBasis: "33%" }}
       >
         {"Set random Image"}
       </button>
@@ -83,13 +132,12 @@ class SubmissionForm extends Component {
         disabled={pending}
         className="btn btn-primary d-flex justify-content-center"
         type="submit"
-        style={{ flexBasis: '49%' }}
+        style={{ flexBasis: "33%" }}
       >
         {buttonContent}
       </button>
     );
   };
-
 }
 
 const mapStateToProps = state => ({
@@ -99,5 +147,9 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateImageLinkInput, submitFoodRecognitionForm, getRandomImage: foodRecognitionGetRandomImage }
+  {
+    updateImageLinkInput,
+    submitFoodRecognitionForm,
+    getRandomImage: foodRecognitionGetRandomImage
+  }
 )(SubmissionForm);

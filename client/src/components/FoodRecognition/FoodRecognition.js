@@ -4,7 +4,6 @@ import "./index.css";
 import FoodRecognitionForm from "./FoodRecognitionForm/FoodRecognitionForm";
 import FoodRecognitionContent from "./FoodRecognitionContent/FoodRecognitionContent";
 
-
 export default class FoodRecognition extends Component {
   render() {
     return (
