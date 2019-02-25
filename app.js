@@ -36,8 +36,8 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use('/foodImageRecognition', foodImageRecognitionRouter);
-app.use('/images', imagesRouter);
+app.use('api/foodImageRecognition', foodImageRecognitionRouter);
+app.use('api/images', imagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

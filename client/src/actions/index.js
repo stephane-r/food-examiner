@@ -31,7 +31,7 @@ export const submitFoodRecognitionForm = (imageLink = '') => {
       dispatch({ type: FOOD_RECOGNITION_UPDATE_IMAGE_SRC, payload: imageLink })
       dispatch({ type: FOOD_RECOGNITION_FETCH_PREDICTIONS_PENDING });
 
-      const url = "http://localhost:3001/foodImageRecognition/";
+      const url = "http://localhost:3001/api/foodImageRecognition/";
       const response = await axios.post(url, {
         imageLink,
         googleRecaptchaValue: ""
