@@ -8,7 +8,8 @@ const unsplash = new Unsplash({
   secret: process.env.UNSPLASH_SECRET_KEY || ""
 });
 
-router.get("/", async (req, res) => {
+// TODO, allow query
+router.get("/random", (req, res) => {
   unsplash.photos
     .getRandomPhoto({ query: "food" })
     .then(toJson)
@@ -18,6 +19,19 @@ router.get("/", async (req, res) => {
     .catch(err => {
       return res.status(400).send(err);
     });
+});
+
+// TODO, allow paging
+// TODO, allow query
+router.get('/', (req, res) => {
+  unsplash.search.photos("food", 1)
+  .then(toJson)
+  .then(json => {
+    return res.send(json);
+  })
+  .catch(err => {
+    return res.status(400).send(err);
+  })
 });
 
 module.exports = router;
