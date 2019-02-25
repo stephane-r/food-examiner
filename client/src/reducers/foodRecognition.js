@@ -4,6 +4,7 @@ import {
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_UPDATED,
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR,
   FOOD_RECOGNITION_UPDATE_IMAGE_SRC,
+  FOOD_RECOGNITION_GET_RANDOM_IMAGE,
   FOOD_RECOGNITION_GO_TO_STAGE_1,
   FOOD_RECOGNITION_GO_TO_STAGE_2,
   FOOD_RECOGNITION_GO_TO_STAGE_3
@@ -38,7 +39,9 @@ const defaultState = {
     }
   ],
   predictionsPending: false,
-  stage: 3
+  stage: 3,
+  imageAuthorName: '',
+  imageAuthorUrl: ''
 };
 
 const foodRecognition = (state = defaultState, action) => {
@@ -70,6 +73,16 @@ const foodRecognition = (state = defaultState, action) => {
         predictionsPending: false,
         predictions: action.payload,
         stage: 1
+      };
+
+    case FOOD_RECOGNITION_GET_RANDOM_IMAGE:
+    const { imageUrl, imageAuthorName, imageAuthorUrl } = action.payload;
+      return {
+        ...state,
+        imageSrc: imageUrl,
+        imageLinkInputValue: imageUrl,
+        imageAuthorName,
+        imageAuthorUrl
       };
 
     case FOOD_RECOGNITION_GO_TO_STAGE_1:

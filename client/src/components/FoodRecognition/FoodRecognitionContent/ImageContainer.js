@@ -1,23 +1,38 @@
-import React from 'react'
+import React from "react";
 
-export default function ImageContainer({ imageSrc }) {
+export default function ImageContainer({ imageSrc, imageAuthorName, imageAuthorUrl }) {
   return (
-    <div className="bg-success text-center food-recognition-content__image-container">
+    <div
+      className="bg-light text-center food-recognition-content__image-container d-flex justify-content-between flex-column"
+    >
       {renderImage(imageSrc)}
+      {renderImageAuthor(imageAuthorName, imageAuthorUrl)}
     </div>
-  )
+  );
 }
 
 function renderImage(imageSrc) {
-    if (imageSrc) {
-      return (
-        <img
-          className="img-fluid"
-          style={{ maxHeight: '100%', width: 'auto' }}
-          src={imageSrc}
-          alt="image-placeholder"
-        />
-      );
-    }
-    return <div className="bg-primary food-recognition-content__image" />;
+  if (imageSrc) {
+    return (
+      <img
+        className="img-fluid"
+        style={{ maxHeight: "95%", width: "auto", marginBottom: "20px" }}
+        src={imageSrc}
+        alt="image-placeholder"
+      />
+    );
   }
+  return <div className="bg-light food-recognition-content__image" />;
+}
+
+function renderImageAuthor(imageAuthorName, imageAuthorUrl) {
+  const referralPrefix = '?utm_source=food_examiner&utm_medium=referral';
+  return (
+    <div className="text-primary" style={{ minHeight: '5%' }}> 
+      <span>Photo by </span>
+      <a href={imageAuthorUrl + referralPrefix} target="_blank">{imageAuthorName}</a>
+      <span> / </span>
+      <a href="https://unsplash.com/?utm_source=food_examiner&utm_medium=referral" target="_blank">Unsplash</a>
+    </div>
+  )
+}

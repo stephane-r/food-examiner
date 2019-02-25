@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import { toast } from "react-toastify";
 
 import {
@@ -7,6 +7,7 @@ import {
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_UPDATED,
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR,
   FOOD_RECOGNITION_UPDATE_IMAGE_SRC,
+  FOOD_RECOGNITION_GET_RANDOM_IMAGE,
   FOOD_RECOGNITION_GO_TO_STAGE_1,
   FOOD_RECOGNITION_GO_TO_STAGE_2,
   FOOD_RECOGNITION_GO_TO_STAGE_3
@@ -19,16 +20,18 @@ export const updateImageLinkInput = text => {
   };
 };
 
-export const submitFoodRecognitionForm = (imageLink = '') => {
+export const submitFoodRecognitionForm = (imageLink = "") => {
   return async dispatch => {
-
     if (!imageLink) {
-      dispatch({ type: FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR, payload: 'Please provide an image link'});
+      dispatch({
+        type: FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR,
+        payload: "Please provide an image link"
+      });
       return;
     }
 
     try {
-      dispatch({ type: FOOD_RECOGNITION_UPDATE_IMAGE_SRC, payload: imageLink })
+      dispatch({ type: FOOD_RECOGNITION_UPDATE_IMAGE_SRC, payload: imageLink });
       dispatch({ type: FOOD_RECOGNITION_FETCH_PREDICTIONS_PENDING });
 
       const url = "http://localhost:3001/api/foodImageRecognition/";
@@ -38,8 +41,10 @@ export const submitFoodRecognitionForm = (imageLink = '') => {
       });
       const predictions = response.data.outputs[0].data.concepts;
 
-      dispatch({ type: FOOD_RECOGNITION_FETCH_PREDICTIONS, payload: predictions });
-      
+      dispatch({
+        type: FOOD_RECOGNITION_FETCH_PREDICTIONS,
+        payload: predictions
+      });
     } catch (err) {
       toast.error(err.response.data.err);
       dispatch({ type: FOOD_RECOGNITION_GO_TO_STAGE_1 });
@@ -47,14 +52,40 @@ export const submitFoodRecognitionForm = (imageLink = '') => {
   };
 };
 
+export const foodRecognitionGetRandomImage = () => {
+  return async dispatch => {
+    try {
+      const url = "http://localhost:3001/api/images/random";
+      const response = await axios.get(url, {});
+
+      const { data } = response;
+      const imageUrl = data.urls.regular;
+      const imageAuthorUrl = data.user.links.html;
+      const imageAuthorName = data.user.name;
+      const payload = {
+        imageUrl,
+        imageAuthorUrl,
+        imageAuthorName
+      };
+
+      dispatch({
+        type: FOOD_RECOGNITION_GET_RANDOM_IMAGE,
+        payload
+      });
+    } catch (err) {
+      toast.error(err.response.data.err[0]);
+    }
+  };
+};
+
 export const foodRecognitionGoToStage1 = () => {
-  return ({ type: FOOD_RECOGNITION_GO_TO_STAGE_1 });
-}
+  return { type: FOOD_RECOGNITION_GO_TO_STAGE_1 };
+};
 
 export const foodRecognitionGoToStage2 = () => {
-  return ({ type: FOOD_RECOGNITION_GO_TO_STAGE_2 });
-}
+  return { type: FOOD_RECOGNITION_GO_TO_STAGE_2 };
+};
 
 export const foodRecognitionGoToStage3 = () => {
-  return ({ type: FOOD_RECOGNITION_GO_TO_STAGE_3 });
-}
+  return { type: FOOD_RECOGNITION_GO_TO_STAGE_3 };
+};

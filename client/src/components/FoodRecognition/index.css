@@ -5,10 +5,11 @@
   }
   
   .food-recognition-content__image-container {
-    min-width: 60%;
     padding: 20px;
+    padding-bottom: 40px;
     margin: 0px auto;
     align-items: center;
+    flex-basis: 60%;
   }
   
   .food-recognition-content__predictions {
