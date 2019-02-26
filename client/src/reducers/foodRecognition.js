@@ -4,11 +4,10 @@ import {
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_UPDATED,
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR,
   FOOD_RECOGNITION_UPDATE_IMAGE_SRC,
-  FOOD_RECOGNITION_GET_IMAGE,
+  FOOD_RECOGNITION_FORM_SET_IMAGE,
   FOOD_RECOGNITION_GO_TO_STAGE_1,
   FOOD_RECOGNITION_GO_TO_STAGE_2,
-  FOOD_RECOGNITION_GO_TO_STAGE_3,
-  IMAGE_GALLERY_SELECT_IMAGE
+  FOOD_RECOGNITION_GO_TO_STAGE_3
 } from "../actions/types";
 
 const defaultState = {
@@ -80,7 +79,7 @@ const foodRecognition = (state = defaultState, action) => {
         stage: 1
       };
 
-    case FOOD_RECOGNITION_GET_IMAGE:
+    case FOOD_RECOGNITION_FORM_SET_IMAGE:
       const { imageUrl, imageAuthorName, imageAuthorUrl } = action.payload;
       return {
         ...state,

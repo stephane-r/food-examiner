@@ -2,7 +2,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    overflow-y: scroll;
   }
   
   /* Create four equal columns that sits next to each other */

@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { selectImage } from '../../../actions/imageGalleryActions';
 
 class ImageGalleryBox extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const referralPrefix = '?utm_source=food_examiner&utm_medium=referral';

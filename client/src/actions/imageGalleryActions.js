@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { IMAGE_GALLERY_FETCH, FOOD_RECOGNITION_GET_IMAGE } from "./types";
+import { IMAGE_GALLERY_FETCH, FOOD_RECOGNITION_FORM_SET_IMAGE } from "./types";
 
 export const fetchImages = () => {
   return async dispatch => {
@@ -23,7 +23,7 @@ export const fetchImages = () => {
 
 export const selectImage = (imageUrl, imageAuthorUrl, imageAuthorName) => {
   return {
-    type: FOOD_RECOGNITION_GET_IMAGE,
+    type: FOOD_RECOGNITION_FORM_SET_IMAGE,
     payload: {
       imageUrl, imageAuthorUrl, imageAuthorName
     }

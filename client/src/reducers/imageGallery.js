@@ -9,7 +9,10 @@ const imageGallery = (state = defaultState, action) => {
     case IMAGE_GALLERY_FETCH:
       return {
         ...state,
-        images: action.payload
+        images: [
+          ...state.images,
+          ...action.payload,
+        ]
       };
 
     default:

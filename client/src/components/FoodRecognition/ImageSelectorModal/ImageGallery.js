@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
+import InfiniteScroll from "react-infinite-scroller";
 
-import { fetchImages } from '../../../actions/imageGalleryActions';
+import { fetchImages } from "../../../actions/imageGalleryActions";
 import "./index.css";
 import ImageGalleryBox from "./ImageGalleryBox";
 
@@ -10,27 +11,46 @@ class ImageGallery extends Component {
     super(props);
   }
 
-  async componentDidMount() {
-    this.props.fetchImages();
-  }
-
   render() {
-    return <div className="image-gallery">{this._renderItems(this.props.images)}</div>;
+    return this.renderWithInfiniteScroll();
   }
 
-  _renderItems = images => {
-    return images.map(i => {
-      return <ImageGalleryBox image={i} key={i.id} />;
+  renderWithInfiniteScroll = () => {
+    return (
+      <div style={{ height: '700px', overflow: 'auto' }}>
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={this.props.fetchImages}
+          hasMore={true}
+          loader={<div>Loading ...</div>}
+          useWindow={false}
+        >
+          <div className="image-gallery">{this._renderItems()}</div>
+        </InfiniteScroll>
+      </div>
+    );
+  };
+
+  _renderItems = () => {
+    return this.props.images.map((i, index) => {
+      return <ImageGalleryBox image={i} key={index} />;
     });
+  };
+
+  loadFunc = () => {
+    console.log("Will execute load function");
   };
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     ...state.imageGallery
   };
 };
 
-export default connect(mapStateToProps, {
-  fetchImages
-})(ImageGallery);
+export default connect(
+  mapStateToProps,
+  {
+    fetchImages
+  }
+)(ImageGallery);
