@@ -8,9 +8,6 @@ import ImageGalleryBox from "./ImageGalleryBox";
 class ImageGallery extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      items: []
-    };
   }
 
   async componentDidMount() {
@@ -18,12 +15,12 @@ class ImageGallery extends Component {
   }
 
   render() {
-    return <div className="image-gallery">{this._renderItems(this.props.imageUrls)}</div>;
+    return <div className="image-gallery">{this._renderItems(this.props.images)}</div>;
   }
 
-  _renderItems = urls => {
-    return urls.map(i => {
-      return <ImageGalleryBox item={i} />;
+  _renderItems = images => {
+    return images.map(i => {
+      return <ImageGalleryBox image={i} key={i.id} />;
     });
   };
 }

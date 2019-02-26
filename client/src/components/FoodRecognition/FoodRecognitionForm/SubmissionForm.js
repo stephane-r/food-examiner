@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Spinner from "react-spinkit";
-import { Modal, ModalHeader } from "reactstrap";
 import { connect } from "react-redux";
 
-import ImageSelector from '../ImageSelector/ImageSelector'
+import ImageSelectorModal from '../ImageSelectorModal/ImageSelectorModal'
 
 import {
   updateImageLinkInput,
@@ -29,7 +28,7 @@ class SubmissionForm extends Component {
         {this._renderSetRandomImageButton()}
         {this._renderSelectFromGalleryButton()}
         {this._renderSubmitButton()}
-        {this._renderModal()}
+        <ImageSelectorModal modal={this.state.modal} toggleModal={this.toggleModal} />
       </form>
     );
   }
@@ -38,27 +37,6 @@ class SubmissionForm extends Component {
     e.preventDefault();
     this.props.submitFoodRecognitionForm(this.props.imageLinkInputValue);
   };
-
-  _renderModal = () => {
-    return (
-      <Modal
-        size={'lg'}
-        isOpen={this.state.modal}
-        toggle={this.toggleModal}
-        className={this.props.className}
-        backdrop
-      >
-        <ModalHeader toggle={this.toggleModal}>Select Image</ModalHeader>
-        <ImageSelector />
-      </Modal>
-    );
-  };
-
-  toggleModal = () => {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
 
   _renderImageLinkInputField = () => {
     const invalidFeedbackStyle = {
@@ -112,6 +90,12 @@ class SubmissionForm extends Component {
       </button>
     );
   };
+
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  }
 
   _renderSubmitButton = () => {
     const pending = this.props.predictionsPending;

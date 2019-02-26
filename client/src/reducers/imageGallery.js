@@ -1,7 +1,7 @@
-import { IMAGE_GALLERY_FETCH } from "../actions/types";
+import { IMAGE_GALLERY_FETCH, IMAGE_GALLERY_SELECT_IMAGE } from "../actions/types";
 
 const defaultState = {
-  imageUrls: []
+  images: []
 };
 
 const imageGallery = (state = defaultState, action) => {
@@ -9,7 +9,7 @@ const imageGallery = (state = defaultState, action) => {
     case IMAGE_GALLERY_FETCH:
       return {
         ...state,
-        imageUrls: action.payload
+        images: action.payload
       };
 
     default:

@@ -7,7 +7,8 @@ import {
   FOOD_RECOGNITION_GET_RANDOM_IMAGE,
   FOOD_RECOGNITION_GO_TO_STAGE_1,
   FOOD_RECOGNITION_GO_TO_STAGE_2,
-  FOOD_RECOGNITION_GO_TO_STAGE_3
+  FOOD_RECOGNITION_GO_TO_STAGE_3,
+  IMAGE_GALLERY_SELECT_IMAGE
 } from "../actions/types";
 
 const defaultState = {
@@ -40,14 +41,18 @@ const defaultState = {
   ],
   predictionsPending: false,
   stage: 3,
-  imageAuthorName: '',
-  imageAuthorUrl: ''
+  imageAuthorName: "",
+  imageAuthorUrl: ""
 };
 
 const foodRecognition = (state = defaultState, action) => {
   switch (action.type) {
     case FOOD_RECOGNITION_IMAGE_LINK_FIELD_UPDATED:
-      return { ...state, imageLinkInputValue: action.payload, imageLinkFieldError: null };
+      return {
+        ...state,
+        imageLinkInputValue: action.payload,
+        imageLinkFieldError: null
+      };
 
     case FOOD_RECOGNITION_UPDATE_IMAGE_SRC:
       return {
@@ -65,7 +70,7 @@ const foodRecognition = (state = defaultState, action) => {
       return {
         ...state,
         imageLinkFieldError: action.payload
-      }
+      };
 
     case FOOD_RECOGNITION_FETCH_PREDICTIONS:
       return {
@@ -76,13 +81,20 @@ const foodRecognition = (state = defaultState, action) => {
       };
 
     case FOOD_RECOGNITION_GET_RANDOM_IMAGE:
-    const { imageUrl, imageAuthorName, imageAuthorUrl } = action.payload;
+      const { imageUrl, imageAuthorName, imageAuthorUrl } = action.payload;
       return {
         ...state,
         imageSrc: imageUrl,
         imageLinkInputValue: imageUrl,
         imageAuthorName,
         imageAuthorUrl
+      };
+
+    case IMAGE_GALLERY_SELECT_IMAGE:
+      return {
+        ...state,
+        imageLinkInputValue: action.payload,
+        imageSrc: action.payload
       };
 
     case FOOD_RECOGNITION_GO_TO_STAGE_1:
