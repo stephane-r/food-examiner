@@ -4,7 +4,7 @@ import {
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_UPDATED,
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR,
   FOOD_RECOGNITION_UPDATE_IMAGE_SRC,
-  FOOD_RECOGNITION_GET_RANDOM_IMAGE,
+  FOOD_RECOGNITION_GET_IMAGE,
   FOOD_RECOGNITION_GO_TO_STAGE_1,
   FOOD_RECOGNITION_GO_TO_STAGE_2,
   FOOD_RECOGNITION_GO_TO_STAGE_3,
@@ -17,6 +17,8 @@ const defaultState = {
   imageSrc:
     "https://images.unsplash.com/photo-1532980400857-e8d9d275d858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
   imageLinkFieldError: null,
+  imageAuthorName: "",
+  imageAuthorUrl: "",
   predictions: [
     {
       name: "blueberries",
@@ -40,9 +42,7 @@ const defaultState = {
     }
   ],
   predictionsPending: false,
-  stage: 3,
-  imageAuthorName: "",
-  imageAuthorUrl: ""
+  stage: 3
 };
 
 const foodRecognition = (state = defaultState, action) => {
@@ -80,7 +80,7 @@ const foodRecognition = (state = defaultState, action) => {
         stage: 1
       };
 
-    case FOOD_RECOGNITION_GET_RANDOM_IMAGE:
+    case FOOD_RECOGNITION_GET_IMAGE:
       const { imageUrl, imageAuthorName, imageAuthorUrl } = action.payload;
       return {
         ...state,
@@ -88,15 +88,6 @@ const foodRecognition = (state = defaultState, action) => {
         imageLinkInputValue: imageUrl,
         imageAuthorName,
         imageAuthorUrl
-      };
-
-    case IMAGE_GALLERY_SELECT_IMAGE:
-      return {
-        ...state,
-        imageLinkInputValue: action.payload.imageUrl,
-        imageSrc: action.payload.imageUrl,
-        imageAuthorName: action.payload.authorName,
-        imageAuthorUrl: action.payload.authorUrl
       };
 
     case FOOD_RECOGNITION_GO_TO_STAGE_1:
