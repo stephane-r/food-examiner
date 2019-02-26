@@ -1,6 +1,6 @@
 import React from "react";
 
-class FoodImage extends React.Component {
+class ImageGalleryBox extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -15,4 +15,4 @@ class FoodImage extends React.Component {
   }
 }
 
-export default FoodImage;
+export default ImageGalleryBox;

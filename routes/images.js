@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const axios = require('axios');
 const Unsplash = require("unsplash-js").default;
 const { toJson } = require("unsplash-js");
 
@@ -23,7 +24,16 @@ router.get("/random", (req, res) => {
 
 // TODO, allow paging
 // TODO, allow query
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+
+  try {
+    const response = await axios.get('https://api.unsplash.com/search/photos?client_id=85234471a9c3ddb5a045efe7ee56d3f28c916c86ab2a51a433b23a5054000b6d&query=food&orientation=landscape&per_page=16');
+    
+    return res.send(response.data);
+  } catch (err) {
+    return res.send(err);
+  }
+
   unsplash.search.photos("food", 1)
   .then(toJson)
   .then(json => {

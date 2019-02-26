@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Spinner from "react-spinkit";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader } from "reactstrap";
 import { connect } from "react-redux";
 
-import FoodImageGallery from './FoodImageGallery';
+import ImageSelector from '../ImageSelector/ImageSelector'
 
 import {
   updateImageLinkInput,
@@ -17,7 +17,6 @@ class SubmissionForm extends Component {
     this.state = {
       modal: false
     };
-
   }
 
   render() {
@@ -49,8 +48,8 @@ class SubmissionForm extends Component {
         className={this.props.className}
         backdrop
       >
-        <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
-        <FoodImageGallery />
+        <ModalHeader toggle={this.toggleModal}>Select Image</ModalHeader>
+        <ImageSelector />
       </Modal>
     );
   };
