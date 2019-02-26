@@ -93,8 +93,10 @@ const foodRecognition = (state = defaultState, action) => {
     case IMAGE_GALLERY_SELECT_IMAGE:
       return {
         ...state,
-        imageLinkInputValue: action.payload,
-        imageSrc: action.payload
+        imageLinkInputValue: action.payload.imageUrl,
+        imageSrc: action.payload.imageUrl,
+        imageAuthorName: action.payload.authorName,
+        imageAuthorUrl: action.payload.authorUrl
       };
 
     case FOOD_RECOGNITION_GO_TO_STAGE_1:

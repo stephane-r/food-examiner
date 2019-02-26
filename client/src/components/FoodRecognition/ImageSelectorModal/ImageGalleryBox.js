@@ -21,7 +21,7 @@ class ImageGalleryBox extends React.Component {
   }
 
   _respond = (e) => {
-    this.props.selectImage(this.props.image.urls.regular);
+    this.props.selectImage(this.props.image.urls.regular, this.props.image.authorUrl, this.props.image.authorName);
   }
 }
 

@@ -21,9 +21,11 @@ export const fetchImages = () => {
   };
 };
 
-export const selectImage = (imageUrl) => {
+export const selectImage = (imageUrl, authorUrl, authorName) => {
   return {
     type: IMAGE_GALLERY_SELECT_IMAGE,
-    payload: imageUrl
+    payload: {
+      imageUrl, authorUrl, authorName
+    }
   }
 };
