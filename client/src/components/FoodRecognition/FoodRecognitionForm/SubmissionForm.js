@@ -65,8 +65,9 @@ class SubmissionForm extends Component {
 
   _renderSelectFromGalleryButton = () => {
     return this._renderButton({
+      text: "Select from gallery",
       onClick: this.props.toggleModal,
-      text: "Select from gallery"
+      additionalClassName: "btn-success"
     });
   };
 
@@ -74,7 +75,8 @@ class SubmissionForm extends Component {
     return this._renderButton({
       text: "Get random image",
       pending: this.props.getRandomImagePending,
-      onClick: this.props.getRandomImage
+      onClick: this.props.getRandomImage,
+      additionalClassName: "btn-success"
     });
   };
 
@@ -90,9 +92,10 @@ class SubmissionForm extends Component {
     text = "Button",
     onClick = () => {},
     pending = false,
-    type = "button"
+    type = "button",
+    additionalClassName = ""
   }) => {
-    let buttonClass = "btn btn-primary d-flex justify-content-center";
+    let buttonClass = `btn btn-primary d-flex justify-content-center ${additionalClassName}`;
     const buttonContent = pending ? this._renderButtonSpinner() : text;
     return (
       <button
