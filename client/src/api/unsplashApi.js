@@ -12,6 +12,7 @@ const unsplashApi = {
         return {
           id: r.id,
           urls: r.urls,
+          description: r.description,
           authorName: r.user.name,
           authorUrl: r.user.links.html
         };
@@ -30,10 +31,12 @@ const unsplashApi = {
       const imageUrl = data.urls.regular;
       const imageAuthorUrl = data.user.links.html;
       const imageAuthorName = data.user.name;
+      const imageDescription = data.description;
       return {
         imageUrl,
         imageAuthorUrl,
-        imageAuthorName
+        imageAuthorName,
+        imageDescription
       };
     } catch (err) {
       return err.response.data.err;

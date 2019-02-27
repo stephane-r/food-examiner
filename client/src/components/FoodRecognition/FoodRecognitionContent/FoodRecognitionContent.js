@@ -10,7 +10,7 @@ class FoodRecognitionContent extends Component {
   render() {
     return (
       <div className="d-flex rounded border border-success food-recognition-content">
-        <ImageContainer imageSrc={this.props.imageSrc} imageAuthorName={this.props.imageAuthorName} imageAuthorUrl={this.props.imageAuthorUrl} />
+        <ImageContainer imageSrc={this.props.imageSrc} imageDescription={this.props.imageDescription} imageAuthorName={this.props.imageAuthorName} imageAuthorUrl={this.props.imageAuthorUrl} />
         <PredictionsList predictions={this.props.predictions} predictionsPending={this.props.predictionsPending} />
       </div>
     );
@@ -19,9 +19,9 @@ class FoodRecognitionContent extends Component {
 }
 
 const mapStateToProps = state => {
-  const { imageSrc, predictions, predictionsPending, imageAuthorName, imageAuthorUrl } = state.foodRecognition;
+  const { imageSrc, imageDescription, predictions, predictionsPending, imageAuthorName, imageAuthorUrl } = state.foodRecognition;
   return {
-    imageSrc, predictions, predictionsPending, imageAuthorName, imageAuthorUrl
+    imageSrc, imageDescription, predictions, predictionsPending, imageAuthorName, imageAuthorUrl
   };
 }
 

@@ -8,10 +8,6 @@ import "./index.css";
 import ImageGalleryBox from "./ImageGalleryBox";
 
 class ImageGallery extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div style={{ height: "700px", overflow: "auto" }}>
