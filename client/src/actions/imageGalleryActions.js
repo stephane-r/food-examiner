@@ -1,4 +1,3 @@
-import axios from "axios";
 import { toast } from "react-toastify";
 
 import {
@@ -7,22 +6,13 @@ import {
   IMAGE_GALLERY_TOGGLE_MODAL,
   IMAGE_GALLERY_CLOSE_MODAL
 } from "./types";
+import unsplashApi from '../api/unsplashApi';
 
 export const fetchImages = (page = 1) => {
   return async dispatch => {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/api/images?page=${page}`
-      );
-      const results = response.data.results.map(r => {
-        return {
-          id: r.id,
-          urls: r.urls,
-          authorName: r.user.name,
-          authorUrl: r.user.links.html
-        };
-      });
-      dispatch({ type: IMAGE_GALLERY_FETCH, payload: results });
+      const payload = await unsplashApi.getImages({ page: 1 });
+      dispatch({ type: IMAGE_GALLERY_FETCH, payload });
     } catch (err) {
       toast.error(err.response.data.err.toString());
     }

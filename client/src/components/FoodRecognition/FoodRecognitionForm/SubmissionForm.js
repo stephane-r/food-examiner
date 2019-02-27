@@ -64,7 +64,6 @@ class SubmissionForm extends Component {
   };
 
   _renderSelectFromGalleryButton = () => {
-    console.log(this.props.toggleModal);
     return this._renderButton({
       onClick: this.props.toggleModal,
       text: "Select from gallery"

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { toast } from "react-toastify";
 
 import {
@@ -14,6 +13,8 @@ import {
   FOOD_RECOGNITION_GO_TO_STAGE_2,
   FOOD_RECOGNITION_GO_TO_STAGE_3
 } from "./types";
+import unsplashApi from '../api/unsplashApi';
+import clarifaiApi from "../api/clarifaiApi";
 
 export const updateImageLinkInput = text => {
   return {
@@ -35,18 +36,12 @@ export const submitFoodRecognitionForm = (imageLink = "") => {
     try {
       dispatch({ type: FOOD_RECOGNITION_UPDATE_IMAGE_SRC, payload: imageLink });
       dispatch({ type: FOOD_RECOGNITION_FETCH_PREDICTIONS_PENDING });
-
-      const url = "http://localhost:3001/api/foodImageRecognition/";
-      const response = await axios.post(url, {
-        imageLink,
-        googleRecaptchaValue: ""
-      });
-      const predictions = response.data.outputs[0].data.concepts;
-
+      const predictions = await clarifaiApi.predictFoodImage({ imageLink, googleRecaptchaValue: "" });
       dispatch({
         type: FOOD_RECOGNITION_FETCH_PREDICTIONS,
         payload: predictions
       });
+      
     } catch (err) {
       toast.error(err.response.data.err);
       dispatch({ type: FOOD_RECOGNITION_GO_TO_STAGE_1 });
@@ -60,26 +55,16 @@ export const foodRecognitionGetRandomImage = () => {
     dispatch({ type: FOOD_RECOGNITION_GET_RANDOM_IMAGE_PENDING });
 
     try {
-      const url = "http://localhost:3001/api/images/random";
-      const response = await axios.get(url, {});
-
-      const { data } = response;
-      const imageUrl = data.urls.regular;
-      const imageAuthorUrl = data.user.links.html;
-      const imageAuthorName = data.user.name;
-      const payload = {
-        imageUrl,
-        imageAuthorUrl,
-        imageAuthorName
-      };
-
+      const payload = await unsplashApi.getRandomImage();
       dispatch({
         type: FOOD_RECOGNITION_FORM_SET_IMAGE,
         payload
       });
+
       dispatch({ type: FOOD_RECOGNITION_GET_RANDOM_IMAGE_SUCCESS });
+
     } catch (err) {
-      toast.error(err.response.data.err[0]);
+      toast.error(err.response.data.err.toString());
     }
   };
 };
