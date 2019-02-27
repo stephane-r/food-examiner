@@ -7,7 +7,7 @@ import SubmissionForm from "./SubmissionForm";
 import {
   foodRecognitionGoToStage2,
   foodRecognitionGoToStage3
-} from "../../../actions";
+} from "../../../actions/foodRecognitionFormActions";
 
 class FoodRecognitionForm extends Component {
   render() {

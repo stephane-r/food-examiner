@@ -7,7 +7,7 @@ import {
   updateImageLinkInput,
   submitFoodRecognitionForm,
   foodRecognitionGetRandomImage
-} from "../../../actions";
+} from "../../../actions/foodRecognitionFormActions";
 import { imageGalleryToggleModal } from "../../../actions/imageGalleryActions";
 
 class SubmissionForm extends Component {
