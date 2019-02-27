@@ -1,5 +1,7 @@
 import React from "react";
 
+import UnsplashAttributionLink from '../../common/UnsplashAttributionLink';
+
 export default function ImageContainer({ imageSrc, imageDescription, imageAuthorName, imageAuthorUrl }) {
   return (
     <div
@@ -26,13 +28,12 @@ function renderImage(imageSrc,imageDescription) {
 }
 
 function renderImageAuthor(imageAuthorName, imageAuthorUrl) {
-  const referralPrefix = '?utm_source=food_examiner&utm_medium=referral';
   return (
     <div className="text-primary" style={{ minHeight: '5%' }}> 
       <span>Photo by </span>
-      <a href={imageAuthorUrl + referralPrefix} target="_blank" rel="noopener noreferrer">{imageAuthorName}</a>
+      <UnsplashAttributionLink baseUrl={imageAuthorUrl} title={imageAuthorName} />
       <span> / </span>
-      <a href="https://unsplash.com/?utm_source=food_examiner&utm_medium=referral" target="_blank" rel="noopener noreferrer">Unsplash</a>
+      <UnsplashAttributionLink />
     </div>
   )
 }

@@ -18,9 +18,9 @@ const defaultState = {
   imageLinkFieldError: null,
   imageSrc:
     "https://images.unsplash.com/photo-1532980400857-e8d9d275d858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
+  imageAuthorName: "Monika Grabkowska",
+  imageAuthorUrl: "https://unsplash.com/@moniqa",
   imageDescription: "",
-  imageAuthorName: "",
-  imageAuthorUrl: "",
   predictions: [
     {
       name: "blueberries",
@@ -96,7 +96,12 @@ const foodRecognition = (state = defaultState, action) => {
       };
 
     case FOOD_RECOGNITION_FORM_SET_IMAGE:
-      const { imageUrl, imageDescription, imageAuthorName, imageAuthorUrl } = action.payload;
+      const {
+        imageUrl,
+        imageDescription,
+        imageAuthorName,
+        imageAuthorUrl
+      } = action.payload;
       return {
         ...state,
         imageSrc: imageUrl,

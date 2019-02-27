@@ -7,6 +7,7 @@ import { fetchImages } from "../../../actions/imageGalleryActions";
 import "./index.css";
 import ImageGalleryBox from "./ImageGalleryBox";
 
+
 class ImageGallery extends Component {
   render() {
     return (
