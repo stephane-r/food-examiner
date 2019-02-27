@@ -8,6 +8,8 @@ import {
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR,
   FOOD_RECOGNITION_UPDATE_IMAGE_SRC,
   FOOD_RECOGNITION_FORM_SET_IMAGE,
+  FOOD_RECOGNITION_GET_RANDOM_IMAGE_PENDING,
+  FOOD_RECOGNITION_GET_RANDOM_IMAGE_SUCCESS,
   FOOD_RECOGNITION_GO_TO_STAGE_1,
   FOOD_RECOGNITION_GO_TO_STAGE_2,
   FOOD_RECOGNITION_GO_TO_STAGE_3
@@ -54,6 +56,9 @@ export const submitFoodRecognitionForm = (imageLink = "") => {
 
 export const foodRecognitionGetRandomImage = () => {
   return async dispatch => {
+
+    dispatch({ type: FOOD_RECOGNITION_GET_RANDOM_IMAGE_PENDING });
+
     try {
       const url = "http://localhost:3001/api/images/random";
       const response = await axios.get(url, {});
@@ -72,6 +77,7 @@ export const foodRecognitionGetRandomImage = () => {
         type: FOOD_RECOGNITION_FORM_SET_IMAGE,
         payload
       });
+      dispatch({ type: FOOD_RECOGNITION_GET_RANDOM_IMAGE_SUCCESS });
     } catch (err) {
       toast.error(err.response.data.err[0]);
     }

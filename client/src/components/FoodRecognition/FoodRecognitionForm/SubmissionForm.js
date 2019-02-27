@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Spinner from "react-spinkit";
 import { connect } from "react-redux";
 
-import ImageSelectorModal from '../ImageSelectorModal/ImageSelectorModal'
+import ImageSelectorModal from "../ImageSelectorModal/ImageSelectorModal";
 
 import {
   updateImageLinkInput,
@@ -28,10 +28,47 @@ class SubmissionForm extends Component {
         {this._renderSetRandomImageButton()}
         {this._renderSelectFromGalleryButton()}
         {this._renderSubmitButton()}
-        <ImageSelectorModal modal={this.state.modal} toggleModal={this.toggleModal} />
+        <ImageSelectorModal
+          modal={this.state.modal}
+          toggleModal={this._toggleModal}
+        />
       </form>
     );
   }
+
+  _renderButton = ({
+    text = "Button", 
+    onClick = () => {}, 
+    pending = false, 
+    type = 'button'
+  }) => {
+    let buttonClass = "btn btn-primary d-flex justify-content-center";
+    const buttonContent = pending ? (
+      this._renderButtonSpinner()
+    ) : text
+    return (
+      <button
+        className={buttonClass}
+        type={type}
+        disabled={pending}
+        onClick={onClick}
+        style={{ flexBasis: "33%" }}
+      >
+        {buttonContent}
+      </button>
+    );
+  }
+
+  _renderButtonSpinner = () => {
+    return (
+      <Spinner
+        name="three-bounce"
+        className="spinner-small"
+        color="white"
+        fadeIn="none"
+      />
+    );
+  };
 
   _submitForm = e => {
     e.preventDefault();
@@ -64,62 +101,32 @@ class SubmissionForm extends Component {
   };
 
   _renderSelectFromGalleryButton = () => {
-    let buttonClass = "btn btn-primary d-flex justify-content-center";
-    return (
-      <button
-        className={buttonClass}
-        type="button"
-        onClick={this.toggleModal}
-        style={{ flexBasis: "33%" }}
-      >
-        {"Select from gallery"}
-      </button>
-    );
+    return this._renderButton({
+      onClick: this._toggleModal,
+      text: "Select from gallery"
+    });
   };
 
   _renderSetRandomImageButton = () => {
-    let buttonClass = "btn btn-primary d-flex justify-content-center";
-    return (
-      <button
-        className={buttonClass}
-        type="button"
-        onClick={this.props.getRandomImage}
-        style={{ flexBasis: "33%" }}
-      >
-        {"Set random Image"}
-      </button>
-    );
+    return this._renderButton({
+      text: "Get random image",
+      pending: this.props.getRandomImagePending,
+      onClick: this.props.getRandomImage
+    });
   };
 
-  toggleModal = () => {
+  _renderSubmitButton = () => {
+    return this._renderButton({
+      text: 'Submit',
+      pending: this.props.predictionsPending,
+      type: 'submit'
+    });
+  };
+
+  _toggleModal = () => {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
-  }
-
-  _renderSubmitButton = () => {
-    const pending = this.props.predictionsPending;
-    const buttonContent = pending ? (
-      <Spinner
-        name="three-bounce"
-        className="spinner-small"
-        color="white"
-        fadeIn="none"
-      />
-    ) : (
-      "Submit"
-    );
-
-    return (
-      <button
-        disabled={pending}
-        className="btn btn-primary d-flex justify-content-center"
-        type="submit"
-        style={{ flexBasis: "33%" }}
-      >
-        {buttonContent}
-      </button>
-    );
   };
 }
 
