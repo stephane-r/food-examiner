@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 
   try {
     await sleep(1000);
-    const response = await axios.get(`https://api.unsplash.com/search/photos?client_id=85234471a9c3ddb5a045efe7ee56d3f28c916c86ab2a51a433b23a5054000b6d&query=food&orientation=landscape&per_page=20&page=${page}`);
+    const response = await axios.get(`https://api.unsplash.com/search/photos?client_id=85234471a9c3ddb5a045efe7ee56d3f28c916c86ab2a51a433b23a5054000b6d&query=food&orientation=landscape&per_page=28&page=${page}`);
 
     return res.send(response.data);
   } catch (err) {
