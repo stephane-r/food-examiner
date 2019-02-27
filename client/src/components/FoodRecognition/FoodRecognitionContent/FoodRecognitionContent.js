@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import ImageContainer from './ImageContainer';
 import PredictionsList from "./PredictionsList";
+import './index.css';
 
 class FoodRecognitionContent extends Component {
 

@@ -1,7 +1,12 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import { IMAGE_GALLERY_FETCH, FOOD_RECOGNITION_FORM_SET_IMAGE } from "./types";
+import {
+  IMAGE_GALLERY_FETCH,
+  FOOD_RECOGNITION_FORM_SET_IMAGE,
+  IMAGE_GALLERY_TOGGLE_MODAL,
+  IMAGE_GALLERY_CLOSE_MODAL
+} from "./types";
 
 export const fetchImages = (page = 1) => {
   return async dispatch => {
@@ -25,13 +30,21 @@ export const fetchImages = (page = 1) => {
 };
 
 export const selectImage = (imageUrl, imageAuthorUrl, imageAuthorName) => {
-  toast.success("Image Selected");
-  return {
-    type: FOOD_RECOGNITION_FORM_SET_IMAGE,
-    payload: {
-      imageUrl,
-      imageAuthorUrl,
-      imageAuthorName
-    }
+  return dispatch => {
+    dispatch({
+      type: FOOD_RECOGNITION_FORM_SET_IMAGE,
+      payload: {
+        imageUrl,
+        imageAuthorUrl,
+        imageAuthorName
+      }
+    });
+    dispatch({
+      type: IMAGE_GALLERY_CLOSE_MODAL
+    });
   };
+};
+
+export const imageGalleryToggleModal = () => {
+  return { type: IMAGE_GALLERY_TOGGLE_MODAL };
 };

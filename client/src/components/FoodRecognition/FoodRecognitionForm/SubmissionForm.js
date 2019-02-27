@@ -3,12 +3,12 @@ import Spinner from "react-spinkit";
 import { connect } from "react-redux";
 
 import ImageSelectorModal from "../ImageSelectorModal/ImageSelectorModal";
-
 import {
   updateImageLinkInput,
   submitFoodRecognitionForm,
   foodRecognitionGetRandomImage
 } from "../../../actions";
+import { imageGalleryToggleModal } from "../../../actions/imageGalleryActions";
 
 class SubmissionForm extends Component {
   constructor(props) {
@@ -28,10 +28,7 @@ class SubmissionForm extends Component {
         {this._renderSetRandomImageButton()}
         {this._renderSelectFromGalleryButton()}
         {this._renderSubmitButton()}
-        <ImageSelectorModal
-          modal={this.state.modal}
-          toggleModal={this._toggleModal}
-        />
+        <ImageSelectorModal />
       </form>
     );
   }
@@ -67,8 +64,9 @@ class SubmissionForm extends Component {
   };
 
   _renderSelectFromGalleryButton = () => {
+    console.log(this.props.toggleModal);
     return this._renderButton({
-      onClick: this._toggleModal,
+      onClick: this.props.toggleModal,
       text: "Select from gallery"
     });
   };
@@ -83,22 +81,20 @@ class SubmissionForm extends Component {
 
   _renderSubmitButton = () => {
     return this._renderButton({
-      text: 'Submit',
+      text: "Submit",
       pending: this.props.predictionsPending,
-      type: 'submit'
+      type: "submit"
     });
   };
 
   _renderButton = ({
-    text = "Button", 
-    onClick = () => {}, 
-    pending = false, 
-    type = 'button'
+    text = "Button",
+    onClick = () => {},
+    pending = false,
+    type = "button"
   }) => {
     let buttonClass = "btn btn-primary d-flex justify-content-center";
-    const buttonContent = pending ? (
-      this._renderButtonSpinner()
-    ) : text
+    const buttonContent = pending ? this._renderButtonSpinner() : text;
     return (
       <button
         className={buttonClass}
@@ -110,7 +106,7 @@ class SubmissionForm extends Component {
         {buttonContent}
       </button>
     );
-  }
+  };
 
   _renderButtonSpinner = () => {
     return (
@@ -121,12 +117,6 @@ class SubmissionForm extends Component {
         fadeIn="none"
       />
     );
-  };
-
-  _toggleModal = () => {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
   };
 }
 
@@ -140,6 +130,7 @@ export default connect(
   {
     updateImageLinkInput,
     submitFoodRecognitionForm,
-    getRandomImage: foodRecognitionGetRandomImage
+    getRandomImage: foodRecognitionGetRandomImage,
+    toggleModal: imageGalleryToggleModal
   }
 )(SubmissionForm);

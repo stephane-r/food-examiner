@@ -37,7 +37,7 @@ function renderItems(predictions, predictionsPending) {
       <div
         style={{ padding: "0.75rem" }}
         key={i}
-        className={`prediction d-flex justify-content-between border-bottom ${determineTextColor(
+        className={`food-recognition-content__prediction d-flex justify-content-between border-bottom ${determineTextColor(
           p.value
         )}`}
       >

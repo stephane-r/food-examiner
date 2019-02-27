@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import "./index.css";
 import FoodRecognitionForm from "./FoodRecognitionForm/FoodRecognitionForm";
 import FoodRecognitionContent from "./FoodRecognitionContent/FoodRecognitionContent";
 

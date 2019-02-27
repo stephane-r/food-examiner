@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader } from "reactstrap";
 
 import ImageSelector from './ImageSelector';
+import { imageGalleryToggleModal } from "../../../actions/imageGalleryActions";
 
-export default class ImageSelectorModal extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = { modal: this.props.modal };
-  }
+class ImageSelectorModal extends Component {
 
   render() {
     return (
         <Modal
         size={'lg'}
-        isOpen={this.props.modal}
+        isOpen={this.props.modalIsOpen}
         toggle={this.props.toggleModal}
         className={this.props.className}
         backdrop
@@ -30,3 +27,11 @@ export default class ImageSelectorModal extends Component {
   }
 
 }
+
+const mapStateToProps = (state) => {
+  return {
+    modalIsOpen: state.imageGallery.modalIsOpen
+  };
+}
+
+export default connect(mapStateToProps, { toggleModal: imageGalleryToggleModal })(ImageSelectorModal);

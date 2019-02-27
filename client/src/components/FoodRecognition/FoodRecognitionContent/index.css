@@ -17,7 +17,7 @@
     overflow: scroll;
   }
   
-  .prediction:hover {
+  .food-recognition-content__prediction:hover {
     background: #f4f9f4;
     transition: all 0.2s;
   }

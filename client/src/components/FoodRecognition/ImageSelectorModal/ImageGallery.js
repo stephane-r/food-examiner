@@ -29,7 +29,7 @@ class ImageGallery extends Component {
 
   _renderLoader = () => {
     return (
-      <div className="d-flex justify-content-center" style={{ margin: '20px auto' }}>
+      <div key={'image-loading-indicator'} className="d-flex justify-content-center" style={{ margin: '20px auto' }}>
         <Spinner
           name="line-scale"
           color="#2C3E50"
@@ -41,7 +41,7 @@ class ImageGallery extends Component {
 
   _renderItems = () => {
     return this.props.images.map((i, index) => {
-      return <ImageGalleryBox image={i} key={index} />;
+      return <ImageGalleryBox image={i} key={index} index={index} />;
     });
   };
 
