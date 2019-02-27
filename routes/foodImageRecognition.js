@@ -11,15 +11,10 @@ const app = new Clarifai.App({
 });
 
 router.post('/',  async (req, res) => {
-  
+
+  // To prevent over using api keys
   // try {
-    
-  //   // For testing loading indicator
-  //   await sleep(1000);
-
-  //   // To prevent over using api keys
   //   res.send(fakeRes);
-
   // } catch (err) {
   //   res.status(500).json({ err: err });
   // }

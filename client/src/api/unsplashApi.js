@@ -3,7 +3,7 @@ import axios from 'axios';
 import apiBaseUrl from './apiBaseUrl';
 
 const unsplashApi = {
-  getImages: async (page = 1) => {
+  getImages: async ({ page = 1 }) => {
     try {
       const response = await axios.get(
         `${apiBaseUrl}/api/images?page=${page}`

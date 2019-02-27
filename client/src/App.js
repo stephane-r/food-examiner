@@ -9,8 +9,6 @@ class App extends Component {
     return (
       <div className="fluid-container">
         <Navbar />
-        <div>{process.env.REACT_APP_NOT_SECRET_CODE}</div>
-        <div>{process.env.NODE_ENV}</div>
         <div className="container">
           <FoodRecognition />
         </div>

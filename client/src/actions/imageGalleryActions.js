@@ -11,7 +11,7 @@ import unsplashApi from '../api/unsplashApi';
 export const fetchImages = (page = 1) => {
   return async dispatch => {
     try {
-      const payload = await unsplashApi.getImages({ page: 1 });
+      const payload = await unsplashApi.getImages({ page });
       dispatch({ type: IMAGE_GALLERY_FETCH, payload });
     } catch (err) {
       toast.error(err.response.data.err.toString());
