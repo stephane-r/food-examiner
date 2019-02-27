@@ -11,7 +11,7 @@ import ImageGalleryBox from "./ImageGalleryBox";
 class ImageGallery extends Component {
   render() {
     return (
-      <div style={{ height: "700px", overflow: "auto" }}>
+      <div style={{ height: "450px", overflow: "auto" }}>
         <InfiniteScroll
           loadMore={() => this.props.fetchImages(this.props.imageGalleryPage)}
           hasMore={true}
