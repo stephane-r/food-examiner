@@ -36,40 +36,6 @@ class SubmissionForm extends Component {
     );
   }
 
-  _renderButton = ({
-    text = "Button", 
-    onClick = () => {}, 
-    pending = false, 
-    type = 'button'
-  }) => {
-    let buttonClass = "btn btn-primary d-flex justify-content-center";
-    const buttonContent = pending ? (
-      this._renderButtonSpinner()
-    ) : text
-    return (
-      <button
-        className={buttonClass}
-        type={type}
-        disabled={pending}
-        onClick={onClick}
-        style={{ flexBasis: "33%" }}
-      >
-        {buttonContent}
-      </button>
-    );
-  }
-
-  _renderButtonSpinner = () => {
-    return (
-      <Spinner
-        name="three-bounce"
-        className="spinner-small"
-        color="white"
-        fadeIn="none"
-      />
-    );
-  };
-
   _submitForm = e => {
     e.preventDefault();
     this.props.submitFoodRecognitionForm(this.props.imageLinkInputValue);
@@ -121,6 +87,40 @@ class SubmissionForm extends Component {
       pending: this.props.predictionsPending,
       type: 'submit'
     });
+  };
+
+  _renderButton = ({
+    text = "Button", 
+    onClick = () => {}, 
+    pending = false, 
+    type = 'button'
+  }) => {
+    let buttonClass = "btn btn-primary d-flex justify-content-center";
+    const buttonContent = pending ? (
+      this._renderButtonSpinner()
+    ) : text
+    return (
+      <button
+        className={buttonClass}
+        type={type}
+        disabled={pending}
+        onClick={onClick}
+        style={{ flexBasis: "33%" }}
+      >
+        {buttonContent}
+      </button>
+    );
+  }
+
+  _renderButtonSpinner = () => {
+    return (
+      <Spinner
+        name="three-bounce"
+        className="spinner-small"
+        color="white"
+        fadeIn="none"
+      />
+    );
   };
 
   _toggleModal = () => {
