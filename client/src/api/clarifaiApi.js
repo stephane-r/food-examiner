@@ -1,9 +1,11 @@
 import axios from "axios";
 
+import apiBaseUrl from './apiBaseUrl';
+
 const clarifaiApi = {
   predictFoodImage: async ({ imageLink = "", googleRecaptchaValue = "" }) => {
     try {
-      const url = "http://localhost:3001/api/foodImageRecognition/";
+      const url = `${apiBaseUrl}/api/foodImageRecognition/`;
       const response = await axios.post(url, {
         imageLink,
         googleRecaptchaValue

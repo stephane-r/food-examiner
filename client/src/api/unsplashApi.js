@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+import apiBaseUrl from './apiBaseUrl';
+
 const unsplashApi = {
   getImages: async (page = 1) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/images?page=${page}`
+        `${apiBaseUrl}/api/images?page=${page}`
       );
       const results = response.data.results.map(r => {
         return {
@@ -22,7 +24,7 @@ const unsplashApi = {
 
   getRandomImage: async () => {
     try {
-      const url = "http://localhost:3001/api/images/random";
+      const url = `${apiBaseUrl}/api/images/random`;
       const response = await axios.get(url, {});
       const { data } = response;
       const imageUrl = data.urls.regular;
