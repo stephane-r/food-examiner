@@ -5,7 +5,7 @@ import UnsplashAttributionLink from '../../common/UnsplashAttributionLink';
 export default function ImageContainer({ imageSrc, imageDescription, imageAuthorName, imageAuthorUrl }) {
   return (
     <div
-      className="bg-light text-center food-recognition-content__image-container d-flex justify-content-between flex-column"
+      className="text-center food-recognition-content__image-container d-flex justify-content-between flex-column"
     >
       {renderImage(imageSrc, imageDescription)}
       {renderImageAuthor(imageAuthorName, imageAuthorUrl)}

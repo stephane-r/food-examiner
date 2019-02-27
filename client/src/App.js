@@ -7,7 +7,7 @@ import Navbar from "./components/common/Navbar";
 class App extends Component {
   render() {
     return (
-      <div className="fluid-container">
+      <div className="fluid-container" style={{ backgroundColor: '#FBF9FA'}}>
         <Navbar />
         <div className="container">
           <FoodRecognition />
