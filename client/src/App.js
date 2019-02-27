@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, Zoom } from "react-toastify";
 
 import FoodRecognition from "./components/FoodRecognition/FoodRecognition";
 import Navbar from "./components/common/Navbar";
@@ -12,7 +12,16 @@ class App extends Component {
         <div className="container">
           <FoodRecognition />
         </div>
-        <ToastContainer />
+        <ToastContainer
+          position="top-right"
+          autoClose={1500}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          transition={Zoom}
+          pauseOnVisibilityChange
+        />
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Spinner from "react-spinkit";
 import InfiniteScroll from "react-infinite-scroller";
 
 import { fetchImages } from "../../../actions/imageGalleryActions";
@@ -12,21 +13,28 @@ class ImageGallery extends Component {
   }
 
   render() {
-    return this.renderWithInfiniteScroll();
-  }
-
-  renderWithInfiniteScroll = () => {
     return (
-      <div style={{ height: '700px', overflow: 'auto' }}>
+      <div style={{ height: "700px", overflow: "auto" }}>
         <InfiniteScroll
-          pageStart={0}
-          loadMore={this.props.fetchImages}
+          loadMore={() => this.props.fetchImages(this.props.imageGalleryPage)}
           hasMore={true}
-          loader={<div>Loading ...</div>}
+          loader={this._renderLoader()}
           useWindow={false}
         >
           <div className="image-gallery">{this._renderItems()}</div>
         </InfiniteScroll>
+      </div>
+    );
+  }
+
+  _renderLoader = () => {
+    return (
+      <div className="d-flex justify-content-center" style={{ margin: '20px auto' }}>
+        <Spinner
+          name="line-scale"
+          color="#2C3E50"
+          fadeIn="none"
+        />
       </div>
     );
   };

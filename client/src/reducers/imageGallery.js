@@ -1,7 +1,8 @@
 import { IMAGE_GALLERY_FETCH, IMAGE_GALLERY_SELECT_IMAGE } from "../actions/types";
 
 const defaultState = {
-  images: []
+  images: [],
+  imageGalleryPage: 1
 };
 
 const imageGallery = (state = defaultState, action) => {
@@ -12,7 +13,8 @@ const imageGallery = (state = defaultState, action) => {
         images: [
           ...state.images,
           ...action.payload,
-        ]
+        ],
+        imageGalleryPage: state.imageGalleryPage + 1
       };
 
     default:
