@@ -6,7 +6,7 @@ import FoodRecognitionContent from "./FoodRecognitionContent/FoodRecognitionCont
 export default class FoodRecognition extends Component {
   render() {
     return (
-      <div style={{ marginTop: "20px", paddingBottom: "20px" }}>
+      <div style={{ marginTop: "20px", paddingBottom: "20px" }} className="food-recognition-container">
         <FoodRecognitionForm />
         <FoodRecognitionContent />
       </div>
