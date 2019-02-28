@@ -36,7 +36,7 @@ class RecipesModal extends React.Component {
 
   _renderRecipes = () => {
     return this.props.recipes.map((r, i) => {
-      return <RecipeBox recipe={r} key={i} />
+      return <RecipeBox recipe={r} key={i}/>
     });
   };
 }

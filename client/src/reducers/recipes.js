@@ -1,4 +1,4 @@
-import { RECIPES_FETCH, RECIPES_FETCH_PENDING, RECIPES_TOGGLE_MODAL } from "../actions/types";
+import { RECIPES_FETCH, RECIPES_TOGGLE_MODAL } from "../actions/types";
 
 const defaultState = {
   recipes: [],
