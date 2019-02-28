@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBook } from '@fortawesome/free-solid-svg-icons'
 
 import { toggleRecipeModal, setRecipesRequestQueries, clearRecipes } from '../../../actions/recipesActions';
 
@@ -19,7 +21,7 @@ class Prediction extends Component {
         <button style={{ marginLeft: "auto" }} className="btn btn-primary" onClick={() => {
             this._openRecipeModal(name)
         }}>
-          View Recipes
+          <span style={{ marginRight: '5px' }}><FontAwesomeIcon icon={faBook} /></span>Recipes
         </button>
       </div>
     );

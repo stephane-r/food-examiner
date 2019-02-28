@@ -4,6 +4,11 @@ import { ToastContainer, Zoom } from "react-toastify";
 import FoodRecognition from "./components/FoodRecognition/FoodRecognition";
 import Navbar from "./components/common/Navbar";
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faBook } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faBook)
+
 class App extends Component {
   render() {
     return (

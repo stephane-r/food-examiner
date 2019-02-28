@@ -4,8 +4,8 @@ export default class RecipeBox extends Component {
   render() {
     const { title, href } = this.props.recipe;
     return (
-      <div className="recipe-box" style={{ flexBasis: "32%" }}>
-        <h5 className="border-bottom" style={{ padding: "10px" }}>
+      <div className="recipe-box">
+        <h5 className="border-bottom" style={{ padding: "10px", minHeight: '80px' }}>
           <a href={href} target="_blank" rel="noopener noreferrer">
             {title}
           </a>
