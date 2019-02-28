@@ -1,0 +1,23 @@
+.recipes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.recipe-box {
+  -webkit-box-shadow: 1px 5px 5px 1px rgba(204, 204, 204, 1);
+  -moz-box-shadow: 1px 5px 5px 1px rgba(204, 204, 204, 1);
+  box-shadow: 1px 5px 5px 1px rgba(204, 204, 204, 1);
+}
+
+@media only screen and (max-width: 992px) {
+  .recipes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .recipes {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,6 +1,8 @@
 import React from "react";
 import Spinner from "react-spinkit";
 
+import Prediction from './Prediction';
+
 export default function PredictionsList({
   predictions,
   predictionsPending = false
@@ -8,10 +10,10 @@ export default function PredictionsList({
   return (
     <div className="food-recognition-content__predictions">
       <div
-        className="d-flex justify-content-between border-bottom"
+        className="d-flex justify-content-start border-bottom"
         style={{ padding: "0.75rem" }}
       >
-        <div>Prediction</div>
+        <div style={{ minWidth: '120px' }}>Prediction</div>
         <div>Probability</div>
       </div>
       {renderItems(predictions, predictionsPending)}
@@ -33,27 +35,6 @@ function renderItems(predictions, predictionsPending) {
     return <div />;
   }
   return predictions.map((p, i) => {
-    return (
-      <div
-        style={{ padding: "0.75rem" }}
-        key={i}
-        className={`food-recognition-content__prediction d-flex justify-content-between border-bottom ${determineTextColor(
-          p.value
-        )}`}
-      >
-        <div>{p.name}</div>
-        <div>{parseFloat(p.value).toFixed(2)}</div>
-      </div>
-    );
+    return <Prediction prediction={p} key={i} />
   });
-}
-
-function determineTextColor(value) {
-  if (value > 0.8) {
-    return "text-success";
-  }
-  if (value > 0.6) {
-    return "text-info";
-  }
-  return "text-warning";
 }

@@ -14,7 +14,7 @@ require('isomorphic-fetch');
 
 const foodImageRecognitionRouter = require('./routes/foodImageRecognition');
 const imagesRouter = require('./routes/images');
-
+const recipesRouter = require('./routes/recipes');
 
 const app = express();
 
@@ -38,6 +38,7 @@ app.use(cors(corsOptions));
 
 app.use('/api/foodImageRecognition', foodImageRecognitionRouter);
 app.use('/api/images', imagesRouter);
+app.use('/api/recipes', recipesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

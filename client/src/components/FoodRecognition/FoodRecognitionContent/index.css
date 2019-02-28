@@ -22,7 +22,7 @@
     transition: all 0.2s;
   }
   
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 992px) {
     .food-recognition-content {
       max-height: initial;
       flex-wrap: wrap;
