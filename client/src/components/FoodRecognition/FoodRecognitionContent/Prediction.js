@@ -17,12 +17,17 @@ class Prediction extends Component {
         <div style={{ minWidth: "120px" }}>{name}</div>
         <div>{parseFloat(value).toFixed(2)}</div>
         <button style={{ marginLeft: "auto" }} className="btn btn-primary" onClick={() => {
-            this.props.toggleRecipeModal()
+            this._openRecipeModal(name)
         }}>
           View Recipes
         </button>
       </div>
     );
+  }
+
+  _openRecipeModal = (keyword) => {
+    this.props.toggleRecipeModal();
+    this.props.fetchRecipes(keyword);
   }
 }
 
@@ -38,5 +43,5 @@ function determineTextColor(value) {
 
 export default connect(
   null,
-  { toggleRecipeModal }
+  { toggleRecipeModal, fetchRecipes }
 )(Prediction);

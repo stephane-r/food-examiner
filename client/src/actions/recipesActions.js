@@ -3,10 +3,10 @@ import axios from "axios";
 
 import toast from "react-toastify";
 
-export const fetchRecipes = (page = 1) => {
+export const fetchRecipes = (keyword = '') => {
   return async dispatch => {
     try {
-      const response = await axios.get("http://localhost:3001/api/recipes");
+      const response = await axios.get(`http://localhost:3001/api/recipes?keyword=${keyword}`);
       const { data } = response;
       const recipes = data.results;
       dispatch({

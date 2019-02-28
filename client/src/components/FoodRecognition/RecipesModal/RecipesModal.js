@@ -7,19 +7,6 @@ import { fetchRecipes, toggleRecipeModal } from '../../../actions/recipesActions
 import "./index.css";
 
 class RecipesModal extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  toggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
-
-  componentDidMount() {
-    this.props.fetchRecipes();
-  }
 
   render() {
     return (
@@ -48,8 +35,8 @@ class RecipesModal extends React.Component {
   }
 
   _renderRecipes = () => {
-    return this.props.recipes.map((r) => {
-      return <RecipeBox recipe={r} />
+    return this.props.recipes.map((r, i) => {
+      return <RecipeBox recipe={r} key={i} />
     });
   };
 }
