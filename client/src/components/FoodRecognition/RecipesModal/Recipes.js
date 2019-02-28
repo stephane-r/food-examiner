@@ -9,6 +9,7 @@ import { fetchRecipes } from "../../../actions/recipesActions";
 
 class Recipes extends Component {
   render() {
+    const { keyword, page } = this.props.queries;
     return (
       <div
         style={{
@@ -19,8 +20,7 @@ class Recipes extends Component {
       >
         <InfiniteScroll
           loadMore={() => {
-            console.log(this.props.queryKeyword);
-            this.props.fetchRecipes(this.props.queryKeyword);
+            this.props.fetchRecipes(keyword, page);
           }}
           hasMore={true}
           loader={this._renderLoader()}

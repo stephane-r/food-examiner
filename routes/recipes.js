@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   const { keyword = 'cake', page = 1 } = req.query;
   try {
       const response = await axios.get(
-        `http://www.recipepuppy.com/api/?q=${keyword}`
+        `http://www.recipepuppy.com/api/?q=${keyword}&p=${page}`
       );
       return res.send(response.data);
     } catch (err) {
