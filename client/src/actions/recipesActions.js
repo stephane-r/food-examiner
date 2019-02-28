@@ -1,7 +1,14 @@
-import { RECIPES_FETCH, RECIPES_TOGGLE_MODAL } from "./types";
+import { RECIPES_FETCH, RECIPES_TOGGLE_MODAL, RECIPES_SET_QUERY_KEYWORD } from "./types";
 import axios from "axios";
 
 import toast from "react-toastify";
+
+export const setRecipesQueryKeyword = (keyword) => {
+  return {
+    type: RECIPES_SET_QUERY_KEYWORD,
+    payload: keyword
+  }
+};
 
 export const fetchRecipes = (keyword = '') => {
   return async dispatch => {

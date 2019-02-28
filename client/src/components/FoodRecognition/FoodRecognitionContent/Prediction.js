@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { fetchRecipes, toggleRecipeModal } from '../../../actions/recipesActions';
+import { fetchRecipes, toggleRecipeModal, setRecipesQueryKeyword } from '../../../actions/recipesActions';
 
 class Prediction extends Component {
   render() {
@@ -26,8 +26,8 @@ class Prediction extends Component {
   }
 
   _openRecipeModal = (keyword) => {
+    this.props.setRecipesQueryKeyword(keyword);
     this.props.toggleRecipeModal();
-    this.props.fetchRecipes(keyword);
   }
 }
 
@@ -43,5 +43,5 @@ function determineTextColor(value) {
 
 export default connect(
   null,
-  { toggleRecipeModal, fetchRecipes }
+  { toggleRecipeModal, fetchRecipes, setRecipesQueryKeyword }
 )(Prediction);

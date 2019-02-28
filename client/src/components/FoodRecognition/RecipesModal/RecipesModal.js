@@ -1,15 +1,15 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
 
-import RecipeBox from "./RecipeBox";
+import Recipes from "./Recipes";
 import {
-  fetchRecipes,
   toggleRecipeModal
 } from "../../../actions/recipesActions";
 import "./index.css";
 
 class RecipesModal extends React.Component {
+
   render() {
     return (
       <div>
@@ -20,13 +20,7 @@ class RecipesModal extends React.Component {
           className={this.props.className}
         >
           <ModalHeader toggle={this.props.toggleModal}>Recipes</ModalHeader>
-
-          <div
-            className="recipes"
-            style={{ height: "400px", maxHeight: "400px", overflowY: "scroll", padding: '10px' }}
-          >
-            {this._renderRecipes()}
-          </div>
+          <Recipes />
           <ModalFooter>
             <div style={{ marginRight: "auto" }}>Recipes from recipe puppy</div>
           </ModalFooter>
@@ -34,19 +28,13 @@ class RecipesModal extends React.Component {
       </div>
     );
   }
-
-  _renderRecipes = () => {
-    return this.props.recipes.map((r, i) => {
-      return <RecipeBox recipe={r} key={i} />;
-    });
-  };
 }
 
 const mapStateToProps = state => {
-  return { ...state.recipes };
+  return { modalIsOpen: state.recipes.modalIsOpen };
 };
 
 export default connect(
   mapStateToProps,
-  { toggleModal: toggleRecipeModal, fetchRecipes }
+  { toggleModal: toggleRecipeModal }
 )(RecipesModal);
