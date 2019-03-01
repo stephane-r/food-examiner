@@ -1,6 +1,3 @@
-let apiBaseUrl = "http://localhost:3001";
-if (process.env.NODE_ENV === "production") {
-  apiBaseUrl = "";
-}
+// empty out because using same url for server and client
 
-export default apiBaseUrl;
+export default "";
