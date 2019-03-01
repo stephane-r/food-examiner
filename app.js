@@ -18,8 +18,8 @@ const recipesRouter = require('./routes/recipes');
 
 const app = express();
 
-
 app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -40,51 +40,11 @@ app.use('/api/foodImageRecognition', foodImageRecognitionRouter);
 app.use('/api/images', imagesRouter);
 app.use('/api/recipes', recipesRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+
+// For any unknown paths, return the react file
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.sendFile(path.resolve(__dirname, 'public', 'error.html'));
-});
-
-
-var port = process.env.PORT || '3001'
+const port = process.env.PORT || '3001'
 app.listen(port);
-
-app.on('error', onError);
-
-/**
- * Event listener for HTTP server "error" event.
- */
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
-
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
-
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
-}

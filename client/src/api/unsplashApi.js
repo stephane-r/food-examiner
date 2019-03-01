@@ -19,7 +19,7 @@ const unsplashApi = {
       });
       return results;
     } catch (err) {
-      return err.response.data.err.toString();
+      throw err.response.data.err.toString();
     }
   },
 
@@ -39,7 +39,7 @@ const unsplashApi = {
         imageDescription
       };
     } catch (err) {
-      return err.response.data.err;
+      throw err.response.data.err.toString();
     }
   }
 };

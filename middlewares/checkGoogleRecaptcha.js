@@ -1,4 +1,3 @@
-const express = require("express");
 const axios = require("axios");
 
 const checkGoogleRecaptcha = async (req, res, next) => {
@@ -8,7 +7,6 @@ const checkGoogleRecaptcha = async (req, res, next) => {
       req.body.googleRecaptchaValue
     }`;
     const response = await axios.post(url);
-    console.log(response);
     if (response.data && response.data.success) {
         return next();
     }
