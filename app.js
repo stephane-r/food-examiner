@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-var whitelist = ['http://localhost:3000', 'http://localhost:3001']
+var whitelist = ['http://localhost:3000', 'http://localhost:3001', 'https://food-examiner.herokuapp.com']
 var corsOptions = {
   origin: function (origin, callback) {
    if (whitelist.indexOf(origin) !== -1 || !origin) {
