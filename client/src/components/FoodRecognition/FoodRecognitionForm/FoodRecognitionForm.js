@@ -6,7 +6,8 @@ import ProvideNewImageButton from "./ProvideNewImageButton";
 import SubmissionForm from "./SubmissionForm";
 import {
   foodRecognitionGoToStage2,
-  foodRecognitionGoToStage3
+  foodRecognitionGoToStage3,
+  updateGoogleRecaptchaValue
 } from "../../../actions/foodRecognitionFormActions";
 
 class FoodRecognitionForm extends Component {
@@ -17,7 +18,7 @@ class FoodRecognitionForm extends Component {
           <div className="d-flex justify-content-center">
             <ReCAPTCHA
               sitekey="6LfzKZMUAAAAAKFeT5RQEEMgmq5AsOvh2y84S6rq"
-              onChange={this.props.goToStage3}
+              onChange={(value) => this.onGoogleRecaptchaTicked(value)}
             />
           </div>
         );
@@ -31,6 +32,11 @@ class FoodRecognitionForm extends Component {
         return <ProvideNewImageButton onClick={this.props.goToStage2} />;
     }
   }
+
+  onGoogleRecaptchaTicked = (value) => {
+    this.props.updateGoogleRecaptchaValue(value);
+    this.props.goToStage3();
+  }
 }
 
 const mapStateToProps = state => {
@@ -42,7 +48,8 @@ const mapStateToProps = state => {
 
 const mapActionToProps = {
   goToStage2: foodRecognitionGoToStage2,
-  goToStage3: foodRecognitionGoToStage3
+  goToStage3: foodRecognitionGoToStage3,
+  updateGoogleRecaptchaValue
 };
 
 export default connect(

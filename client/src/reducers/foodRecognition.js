@@ -5,6 +5,7 @@ import {
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR,
   FOOD_RECOGNITION_UPDATE_IMAGE_SRC,
   FOOD_RECOGNITION_FORM_SET_IMAGE,
+  FOOD_RECOGNITION_SET_GOOGLE_RECAPTCHA_VALUE,
   FOOD_RECOGNITION_GET_RANDOM_IMAGE_PENDING,
   FOOD_RECOGNITION_GET_RANDOM_IMAGE_SUCCESS,
   FOOD_RECOGNITION_GO_TO_STAGE_1,
@@ -21,6 +22,7 @@ const defaultState = {
   imageAuthorName: "Monika Grabkowska",
   imageAuthorUrl: "https://unsplash.com/@moniqa",
   imageDescription: "",
+  googleRecaptchaValue: "",
   predictions: [
     {
       name: "blueberries",
@@ -45,7 +47,7 @@ const defaultState = {
   ],
   predictionsPending: false,
   getRandomImagePending: false,
-  stage: 3
+  stage: 1
 };
 
 const foodRecognition = (state = defaultState, action) => {
@@ -61,6 +63,12 @@ const foodRecognition = (state = defaultState, action) => {
       return {
         ...state,
         imageSrc: action.payload
+      };
+
+    case FOOD_RECOGNITION_SET_GOOGLE_RECAPTCHA_VALUE:
+      return {
+        ...state,
+        googleRecaptchaValue: action.payload
       };
 
     case FOOD_RECOGNITION_FETCH_PREDICTIONS_PENDING:

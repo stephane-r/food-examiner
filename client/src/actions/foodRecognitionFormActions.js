@@ -7,6 +7,7 @@ import {
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR,
   FOOD_RECOGNITION_UPDATE_IMAGE_SRC,
   FOOD_RECOGNITION_FORM_SET_IMAGE,
+  FOOD_RECOGNITION_SET_GOOGLE_RECAPTCHA_VALUE,
   FOOD_RECOGNITION_GET_RANDOM_IMAGE_PENDING,
   FOOD_RECOGNITION_GET_RANDOM_IMAGE_SUCCESS,
   FOOD_RECOGNITION_GO_TO_STAGE_1,
@@ -23,7 +24,7 @@ export const updateImageLinkInput = text => {
   };
 };
 
-export const submitFoodRecognitionForm = (imageLink = "") => {
+export const submitFoodRecognitionForm = (imageLink = "", googleRecaptchaValue = "") => {
   return async dispatch => {
     if (!imageLink) {
       dispatch({
@@ -36,18 +37,25 @@ export const submitFoodRecognitionForm = (imageLink = "") => {
     try {
       dispatch({ type: FOOD_RECOGNITION_UPDATE_IMAGE_SRC, payload: imageLink });
       dispatch({ type: FOOD_RECOGNITION_FETCH_PREDICTIONS_PENDING });
-      const predictions = await clarifaiApi.predictFoodImage({ imageLink, googleRecaptchaValue: "" });
+      const predictions = await clarifaiApi.predictFoodImage({ imageLink, googleRecaptchaValue });
       dispatch({
         type: FOOD_RECOGNITION_FETCH_PREDICTIONS,
         payload: predictions
       });
       
     } catch (err) {
-      toast.error(err.response.data.err);
+      toast.error(err);
       dispatch({ type: FOOD_RECOGNITION_GO_TO_STAGE_1 });
     }
   };
 };
+
+export const updateGoogleRecaptchaValue = (value) => {
+  return {
+    type: FOOD_RECOGNITION_SET_GOOGLE_RECAPTCHA_VALUE,
+    payload: value
+  }
+}
 
 export const foodRecognitionGetRandomImage = () => {
   return async dispatch => {

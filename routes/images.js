@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const axios = require('axios');
 const Unsplash = require("unsplash-js").default;
 const { toJson } = require("unsplash-js");
-
-const { sleep } = require('../utils');
 
 const unsplash = new Unsplash({
   applicationId: process.env.UNSPLASH_ACCESS_KEY || "",
@@ -35,16 +32,6 @@ router.get('/', async (req, res) => {
     .catch(err => {
       return res.status(400).send(err);
     });
-
-  // old way
-  // try {
-  //   await sleep(1000);
-  //   const response = await axios.get(`https://api.unsplash.com/search/photos?client_id=85234471a9c3ddb5a045efe7ee56d3f28c916c86ab2a51a433b23a5054000b6d&query=food&orientation=landscape&per_page=28&page=${page}`);
-  //
-  //   return res.send(response.data);
-  // } catch (err) {
-  //   return res.send(err);
-  // }
 
 });
 

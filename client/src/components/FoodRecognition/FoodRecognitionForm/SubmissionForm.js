@@ -35,7 +35,7 @@ class SubmissionForm extends Component {
 
   _submitForm = e => {
     e.preventDefault();
-    this.props.submitFoodRecognitionForm(this.props.imageLinkInputValue);
+    this.props.submitFoodRecognitionForm(this.props.imageLinkInputValue, this.props.googleRecaptchaValue);
   };
 
   _renderImageLinkInputField = () => {
@@ -123,8 +123,7 @@ class SubmissionForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  ...state.foodRecognition,
-  ...state.imageLinkFieldError
+  ...state.foodRecognition
 });
 
 export default connect(
