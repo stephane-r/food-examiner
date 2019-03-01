@@ -19,7 +19,7 @@ const recipesRouter = require('./routes/recipes');
 const app = express();
 
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -43,7 +43,7 @@ app.use('/api/recipes', recipesRouter);
 
 // For any unknown paths, return the react file
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 const port = process.env.PORT || '3001'
