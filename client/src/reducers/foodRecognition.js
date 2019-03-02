@@ -48,7 +48,7 @@ const defaultState = {
   ],
   predictionsPending: false,
   getRandomImagePending: false,
-  stage: 3
+  stage: 1
 };
 
 const foodRecognition = (state = defaultState, action) => {
