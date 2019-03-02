@@ -1,6 +1,7 @@
 import {
   FOOD_RECOGNITION_FETCH_PREDICTIONS,
   FOOD_RECOGNITION_FETCH_PREDICTIONS_PENDING,
+  FOOD_RECOGNITION_FETCH_PREDICTIONS_FAILURE,
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_UPDATED,
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR,
   FOOD_RECOGNITION_UPDATE_IMAGE_SRC,
@@ -76,6 +77,12 @@ const foodRecognition = (state = defaultState, action) => {
         ...state,
         predictionsPending: true
       };
+
+    case FOOD_RECOGNITION_FETCH_PREDICTIONS_FAILURE:
+      return {
+        ...state,
+        predictionsPending: false
+      }
 
     case FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR:
       return {

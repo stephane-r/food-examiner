@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import {
   FOOD_RECOGNITION_FETCH_PREDICTIONS,
   FOOD_RECOGNITION_FETCH_PREDICTIONS_PENDING,
+  FOOD_RECOGNITION_FETCH_PREDICTIONS_FAILURE,
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_UPDATED,
   FOOD_RECOGNITION_IMAGE_LINK_FIELD_ERROR,
   FOOD_RECOGNITION_UPDATE_IMAGE_SRC,
@@ -45,6 +46,7 @@ export const submitFoodRecognitionForm = (imageLink = "", googleRecaptchaValue =
       
     } catch (error) {
       toast.error(error);
+      dispatch({ type: FOOD_RECOGNITION_FETCH_PREDICTIONS_FAILURE });
       dispatch({ type: FOOD_RECOGNITION_GO_TO_STAGE_1 });
     }
   };
