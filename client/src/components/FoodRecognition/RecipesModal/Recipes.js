@@ -22,7 +22,7 @@ class Recipes extends Component {
           loadMore={() => {
             this.props.fetchRecipes(keyword, page);
           }}
-          hasMore={true}
+          hasMore={this.props.hasMoreRecipesToLoad}
           loader={this._renderLoader()}
           useWindow={false}
         >

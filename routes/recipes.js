@@ -12,9 +12,8 @@ router.get('/', async (req, res) => {
       );
       return res.send(response.data);
     } catch (err) {
-      return err;
+      return res.send(err);
     }
-
 });
 
 module.exports = router;

@@ -23,7 +23,6 @@ const unsplashApi = {
       return payload;
     
     } catch (error) {
-      console.log(error.response.data.errors.join(', '));
       throw error.response.data.errors.join(', ');
     }
   },
@@ -43,8 +42,8 @@ const unsplashApi = {
         imageAuthorName,
         imageDescription
       };
-    } catch (err) {
-      throw err.response.data.err.toString();
+    } catch (error) {
+      throw error.response.data.errors.join(', ');
     }
   }
 };
