@@ -17,7 +17,11 @@ const unsplashApi = {
           authorUrl: r.user.links.html
         };
       });
-      return results;
+      const payload = {
+        results,
+        totalPages: response.data.total_pages
+      }
+      return payload;
     } catch (err) {
       throw err.response.data.err.toString();
     }

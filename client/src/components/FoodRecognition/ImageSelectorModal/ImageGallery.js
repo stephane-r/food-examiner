@@ -14,7 +14,7 @@ class ImageGallery extends Component {
       <div style={{ height: "450px", overflow: "auto" }}>
         <InfiniteScroll
           loadMore={() => this.props.fetchImages(this.props.imageGalleryPage)}
-          hasMore={true}
+          hasMore={this.props.hasMoreImagesToLoad}
           loader={this._renderLoader()}
           useWindow={false}
         >
@@ -40,10 +40,6 @@ class ImageGallery extends Component {
     return this.props.images.map((i, index) => {
       return <ImageGalleryBox image={i} key={index} index={index} />;
     });
-  };
-
-  loadFunc = () => {
-    console.log("Will execute load function");
   };
 }
 

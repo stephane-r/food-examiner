@@ -1,21 +1,31 @@
-import { IMAGE_GALLERY_FETCH, IMAGE_GALLERY_TOGGLE_MODAL, IMAGE_GALLERY_CLOSE_MODAL } from "../actions/types";
+import { IMAGE_GALLERY_FETCH, IMAGE_GALLERY_TOGGLE_MODAL, IMAGE_GALLERY_CLOSE_MODAL, IMAGE_GALLERY_FETCH_FAILURE } from "../actions/types";
 
 const defaultState = {
   images: [],
   imageGalleryPage: 1,
-  modalIsOpen: false
+  modalIsOpen: false,
+  hasMoreImagesToLoad: true
 };
 
 const imageGallery = (state = defaultState, action) => {
   switch (action.type) {
     case IMAGE_GALLERY_FETCH:
+      const { totalPages, results } = action.payload;
+      const nextPage = state.imageGalleryPage + 1;
+      const hasMoreImagesToLoad = nextPage === totalPages ? false : true;
       return {
         ...state,
         images: [
           ...state.images,
-          ...action.payload,
+          ...results,
         ],
-        imageGalleryPage: state.imageGalleryPage + 1
+        hasMoreImagesToLoad,
+        imageGalleryPage: nextPage
+      };
+
+    case IMAGE_GALLERY_FETCH_FAILURE:
+      return {
+
       };
 
     case IMAGE_GALLERY_TOGGLE_MODAL:
