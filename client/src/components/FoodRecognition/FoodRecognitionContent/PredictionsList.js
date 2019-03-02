@@ -34,7 +34,6 @@ function renderItems(predictions, predictionsPending) {
   if (!predictions) {
     return <div />;
   }
-  console.log(predictions);
   return predictions.map((p, i) => {
     return <Prediction prediction={p} key={i} />
   });

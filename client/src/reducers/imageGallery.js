@@ -25,7 +25,8 @@ const imageGallery = (state = defaultState, action) => {
 
     case IMAGE_GALLERY_FETCH_FAILURE:
       return {
-
+        ...state,
+        hasMoreImagesToLoad: false
       };
 
     case IMAGE_GALLERY_TOGGLE_MODAL:

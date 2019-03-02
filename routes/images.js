@@ -14,23 +14,25 @@ router.get("/random", (req, res) => {
     .getRandomPhoto({ query: "food" })
     .then(toJson)
     .then(json => {
-      return res.send(json);
+      const status = json.errors ? 400 : 200;
+      return res.status(status).send(json);
     })
     .catch(err => {
-      return res.status(400).send(err);
+      return res.send(err);
     });
 });
 
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
 
   const { page = 1 } = req.query;
   unsplash.search.photos("food", page, 28)
     .then(toJson)
     .then(json => {
-      return res.send(json);
+      const status = json.errors ? 400 : 200;
+      return res.status(status).send(json);
     })
     .catch(err => {
-      return res.status(400).send(err);
+      return res.send(err);
     });
 
 });

@@ -1,13 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
-import apiBaseUrl from './apiBaseUrl';
+import apiBaseUrl from "./apiBaseUrl";
 
 const unsplashApi = {
   getImages: async ({ page = 1 }) => {
+    
     try {
-      const response = await axios.get(
-        `${apiBaseUrl}/api/images?page=${page}`
-      );
+      const response = await axios.get(`${apiBaseUrl}/api/images?page=${page}`);
       const results = response.data.results.map(r => {
         return {
           id: r.id,
@@ -20,10 +19,12 @@ const unsplashApi = {
       const payload = {
         results,
         totalPages: response.data.total_pages
-      }
+      };
       return payload;
-    } catch (err) {
-      throw err.response.data.err.toString();
+    
+    } catch (error) {
+      console.log(error.response.data.errors.join(', '));
+      throw error.response.data.errors.join(', ');
     }
   },
 
