@@ -10,7 +10,7 @@ class Prediction extends Component {
     const { value, name } = this.props.prediction;
     return (
       <div
-        style={{ padding: "0.75rem" }}
+        style={{ padding: "0.75rem", alignItems: 'center' }}
         key={this.props.key}
         className={`food-recognition-content__prediction d-flex justify-content-start border-bottom ${determineTextColor(
           value
