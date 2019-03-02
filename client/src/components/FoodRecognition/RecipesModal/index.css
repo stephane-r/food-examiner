@@ -5,9 +5,28 @@
 }
 
 .recipe-box {
+  border-top: 2px solid #61A699;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   -webkit-box-shadow: 1px 5px 5px 1px rgba(204, 204, 204, 1);
   -moz-box-shadow: 1px 5px 5px 1px rgba(204, 204, 204, 1);
   box-shadow: 1px 5px 5px 1px rgba(204, 204, 204, 1);
+}
+
+.recipe-title {
+  position: relative;
+}
+
+.recipe-title-triangle {
+  width: 0;
+  height: 0;
+  border-top: 20px solid #fff;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  position: absolute;
+  top: 10px;
+  right: -10px;
+  transform: rotate(90deg);
 }
 
 @media only screen and (max-width: 992px) {

@@ -4,6 +4,7 @@ const path = require("path");
 const logger = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const compression = require('compression')
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -17,7 +18,7 @@ const imagesRouter = require("./routes/images");
 const recipesRouter = require("./routes/recipes");
 
 const app = express();
-
+app.use(compression())
 app.use(logger("dev"));
 app.use(express.static(path.join(__dirname, "client/build")));
 app.use(bodyParser.urlencoded({ extended: false }));
