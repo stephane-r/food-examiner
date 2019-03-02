@@ -8,7 +8,7 @@ const app = new Clarifai.App({
   apiKey: process.env.CLARIFAI_API_KEY || "CLARIFAI_API_KEY"
 });
 
-router.post("/", checkGoogleRecaptcha, async (req, res) => {
+router.post("/", async (req, res) => {
   app.models
     .predict("bd367be194cf45149e75f01d59f77ba7", req.body.imageLink)
     .then(

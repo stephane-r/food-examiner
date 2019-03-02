@@ -73,7 +73,7 @@ class SubmissionForm extends Component {
 
   _renderSetRandomImageButton = () => {
     return this._renderButton({
-      text: "Get random image",
+      text: "Get a random food image",
       pending: this.props.getRandomImagePending,
       onClick: this.props.getRandomImage,
       additionalClassName: "btn-success"
