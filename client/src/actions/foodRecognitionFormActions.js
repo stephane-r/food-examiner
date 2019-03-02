@@ -43,8 +43,8 @@ export const submitFoodRecognitionForm = (imageLink = "", googleRecaptchaValue =
         payload: predictions
       });
       
-    } catch (err) {
-      toast.error(err);
+    } catch (error) {
+      toast.error(error);
       dispatch({ type: FOOD_RECOGNITION_GO_TO_STAGE_1 });
     }
   };

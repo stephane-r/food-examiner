@@ -13,7 +13,7 @@ const clarifaiApi = {
       const predictions = response.data.outputs[0].data.concepts;
       return predictions;
     } catch (err) {
-      throw err.response.data.err.toString();
+      throw err.response.data.status.description;
     }
   }
 };
