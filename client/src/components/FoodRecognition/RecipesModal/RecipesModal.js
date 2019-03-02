@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, ModalHeader, ModalFooter } from "reactstrap";
+import { Modal, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
