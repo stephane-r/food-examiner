@@ -12,9 +12,7 @@ class Prediction extends Component {
       <div
         style={{ padding: "0.75rem", alignItems: 'center' }}
         key={this.props.key}
-        className={`food-recognition-content__prediction d-flex justify-content-start border-bottom ${determineTextColor(
-          value
-        )}`}
+        className={`food-recognition-content__prediction d-flex justify-content-start border-bottom text-primary`}
       >
         <div style={{ minWidth: "120px" }}>{name}</div>
         <div>{parseFloat(value).toFixed(2)}</div>
@@ -32,16 +30,6 @@ class Prediction extends Component {
     this.props.setRecipesRequestQueries({keyword, page: 1});
     this.props.toggleRecipeModal();
   }
-}
-
-function determineTextColor(value) {
-  if (value > 0.8) {
-    return "text-success";
-  }
-  if (value > 0.6) {
-    return "text-info";
-  }
-  return "text-warning";
 }
 
 export default connect(
