@@ -46,7 +46,7 @@ class RecipesModal extends React.Component {
         }}
         className="text-white"
       >
-        <div style={{ width: '300px', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '10px' }} className="bg-success recipe-title">
+        <div style={{ minWidth: '300px', maxWidth: '500px', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '10px' }} className="bg-success recipe-title">
           <span style={{ marginRight: "5px" }}>
             <FontAwesomeIcon icon={faBook} />
           </span>
