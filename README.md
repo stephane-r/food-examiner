@@ -1,6 +1,6 @@
 # Food Examiner
 
-An application that provide various food related inforamtion including
+An application that provides various food related inforamtion including
 - Food image recognition (powered by Clarifai API)
 - Food images request (powered by Unsplash API)
 - Recipes search (powered by Recipe Puppy API)
@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Please make sure you have node.js installed, you can install node.js via https://nodejs.org/en/
+You will need to have node.js installed, you can install node.js via https://nodejs.org/en/
 
 ### Installing
 
@@ -30,7 +30,8 @@ $ npm install
 ```
 
 ### Environment variable file
-Create a .env file for api keys, an example named .env.example is provided.
+Create a .env file for api keys, an example named .env.example is provided, the .env file will follow the same format as .env.example.
+
 Please refer to the respective documentation on how to setup api keys for different apis.
 - Unsplash: https://unsplash.com/documentation
 - Clarifai: https://clarifai.com/developer/docs/
