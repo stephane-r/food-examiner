@@ -32,9 +32,9 @@ $ npm install
 ### Environment variable file
 Create a .env file for api keys, an example named .env.example is provided.
 Please refer to the respective documentation on how to setup api keys for different apis.
-Unsplash: https://unsplash.com/documentation
-Clarifai: https://clarifai.com/developer/docs/
-Google Recaptcha: https://www.google.com/recaptcha/intro/v3.html
+- Unsplash: https://unsplash.com/documentation
+- Clarifai: https://clarifai.com/developer/docs/
+- Google Recaptcha: https://www.google.com/recaptcha/intro/v3.html
 
 ### Running the application
 
