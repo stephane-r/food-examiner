@@ -63,14 +63,15 @@ $ nodemon app.js
     ```
     $ login heroku
     ```
-5. Go to the heroku web dashboard, press on 'New', then 'Create new app'
+5. Go to the heroku web dashboard, press on 'New' -> 'Create new app'
 6. Enter your application name and submit
-7. Add heroku as a remote repository
+7. Setup environment variables by going to 'Settings' -> 'Reveal config vars' -> provide the environment variable values.
+8. Add heroku as a remote repository
    ```
     $ git init
     $ heroku git:remote -a <your-heroku-application-name>
    ```
-8. Push to heroku (deploy)
+9. Push to heroku (deploy)
     ```
     $ git push heroku master
     ```
