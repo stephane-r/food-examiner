@@ -41,18 +41,14 @@ class RecipesModal extends React.Component {
     return (
       <div
         style={{
-          padding: "20px",
-          paddingLeft: "0px"
+          padding: "20px"
         }}
-        className="text-white"
+        className="text-success"
       >
-        <div style={{ minWidth: '300px', maxWidth: '500px', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '10px' }} className="bg-success recipe-title">
           <span style={{ marginRight: "5px" }}>
             <FontAwesomeIcon icon={faBook} />
           </span>
           Recipes related to {this.props.keyword}
-          <div className="recipe-title-triangle"></div>
-        </div>
       </div>
     );
   };
