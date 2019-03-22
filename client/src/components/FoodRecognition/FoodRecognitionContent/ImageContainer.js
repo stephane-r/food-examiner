@@ -1,4 +1,6 @@
 import React from "react";
+import Spinner from "react-spinkit";
+import Img from 'react-image';
 
 import UnsplashAttributionLink from '../../common/UnsplashAttributionLink';
 
@@ -13,14 +15,23 @@ export default function ImageContainer({ imageSrc, imageDescription, imageAuthor
   );
 }
 
+function renderImageLoadingSpinner() {
+  return (
+    <div style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Spinner name="ball-scale-multiple" fadeIn={'none'} />
+    </div>
+  )
+}
+
 function renderImage(imageSrc,imageDescription) {
   if (imageSrc) {
     return (
-      <img
+      <Img
         className="img-fluid"
         style={{ maxHeight: "95%", width: "auto", marginBottom: "20px" }}
         src={imageSrc}
         alt={imageDescription}
+        loader={renderImageLoadingSpinner()}
       />
     );
   }
