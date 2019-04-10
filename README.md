@@ -1,7 +1,7 @@
 # Food Examiner
 
 An application that provides various food related inforamtion including
-- Food image recognition (powered by Clarifai API)
+- Food image recognition with machine learning (powered by Clarifai API)
 - Food images request (powered by Unsplash API)
 - Recipes search (powered by Recipe Puppy API)
 
